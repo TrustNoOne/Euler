@@ -15,9 +15,8 @@ object Euler10 {
 }
 
 object Euler9 {
-  import scala.math._
+  import scala.math.sqrt
   def resolve = {
-    var res = (0, 0, 0.0)
     for (a <- 2 to 999; b <- a + 1 to 999 if a + b < 1000 if a + b + sqrt(a * a + b * b) == 1000)
       yield (a, b, sqrt(a * a + b * b))
   }

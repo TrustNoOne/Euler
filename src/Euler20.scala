@@ -1,8 +1,27 @@
 
 object Resolve20 {
   def main(args: Array[String]) {
-    println(Euler11 resolve)
+    //    println(Euler11 resolve)
+    println(Euler12 resolve)
+
   }
+}
+
+object Euler12 {
+  import scala.math.sqrt
+  import scala.collection.parallel.immutable.ParSeq
+  
+  def findOverDivisors(currInt: Long, triang: Long, nDiv: Int): Long = {
+    if (numDivisors(triang) <= nDiv) findOverDivisors(currInt + 1, triang + currInt + 1, nDiv)
+    else triang
+  }
+
+  def numDivisors(n: Long): Int =  (1L to n/2).par.filter(n%_==0).size +1  
+//    if (currDiv > n) 1 :: Nil
+//    else if (n % currDiv == 0) currDiv :: divisors(n, currDiv + 1)
+//    else divisors(n, currDiv + 1)
+
+  def resolve = findOverDivisors(1, 1, 500)
 }
 
 object Euler11 {
@@ -28,6 +47,14 @@ object Euler11 {
       List(20, 73, 35, 29, 78, 31, 90, 01, 74, 31, 49, 71, 48, 86, 81, 16, 23, 57, 05, 54),
       List(01, 70, 54, 71, 83, 51, 54, 69, 16, 92, 33, 48, 61, 43, 52, 01, 89, 19, 67, 48))
 
-      l(2)(2)
+    val maxRow = l.map(_.sliding(4).map(_ reduceLeft (_ * _)).max).max
+    val maxCol = l.transpose.map(_.sliding(4).map(_ reduceLeft (_ * _)).max).max
+    val maxULtoDR = (for (i <- 0 until l.length - 3; j <- 0 until l(i).length if j + 3 < l(i).length)
+      yield l(i)(j) * l(i + 1)(j + 1) * l(i + 2)(j + 2) * l(i + 3)(j + 3)).max
+    val maxDLtoUR = (for (i <- 3 until l.length; j <- 0 until l(i).length if j + 3 < l(i).length)
+      yield l(i)(j) * l(i - 1)(j + 1) * l(i - 2)(j + 2) * l(i - 3)(j + 3)).max
+
+    List(maxRow, maxCol, maxULtoDR, maxDLtoUR).max
+
   }
 }
