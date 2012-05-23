@@ -1,11 +1,17 @@
 object Resolve10 {
   def main(args: Array[String]) {
-	  println(Euler10 resolve)
+    println("4: " + (Euler4 resolve))
+    println("5: " + (Euler5 resolve))
+    println("6: " + (Euler6 resolve))
+    println("7: " + (Euler7 resolve))
+    println("8: " + (Euler8 resolve))
+    println("9: " + (Euler9 resolve))
+    println("10: " + (Euler10 resolve))
   }
 }
 
 object Euler10 {
-  def resolve = 2L to 2000000L filter (Euler7.isPrime(_)) reduceLeft (_+_)
+  def resolve = 2L to 2000000L filter (Euler7.isPrime(_)) reduceLeft (_ + _)
 }
 
 object Euler9 {
