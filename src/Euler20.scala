@@ -3,25 +3,25 @@ object Resolve20 {
   def main(args: Array[String]) {
     //    println(Euler11 resolve)
     println(Euler12 resolve)
-
   }
 }
 
 object Euler12 {
-  import scala.math.sqrt
-  import scala.collection.parallel.immutable.ParSeq
-  
-  def findOverDivisors(currInt: Long, triang: Long, nDiv: Int): Long = {
-    if (numDivisors(triang) <= nDiv) findOverDivisors(currInt + 1, triang + currInt + 1, nDiv)
-    else triang
+  def numDivisors(n: Long, curr: Long = 2, cnt: Int = 0, acc: Int = 1): Int = {
+    if (curr > n) acc * (cnt + 1)
+    else if (n % curr == 0) numDivisors(n / curr, curr, cnt + 1, acc)
+    else numDivisors(n, curr + 1, 0, acc * (cnt + 1))
   }
 
-  def numDivisors(n: Long): Int =  (1L to n/2).par.filter(n%_==0).size +1  
-//    if (currDiv > n) 1 :: Nil
-//    else if (n % currDiv == 0) currDiv :: divisors(n, currDiv + 1)
-//    else divisors(n, currDiv + 1)
+  def resolve = {
+    def loop(i: Long): Long = {
+      if (numDivisors(i * (i + 1) / 2) > 500) i
+      else loop(i + 1)
+    }
 
-  def resolve = findOverDivisors(1, 1, 500)
+    val i = loop(1)
+    i * (i + 1) / 2
+  }
 }
 
 object Euler11 {
