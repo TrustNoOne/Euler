@@ -3,7 +3,20 @@ object Resolve20 {
   def main(args: Array[String]) {
     //    println(Euler11 resolve)
     //    println(Euler12 resolve)
-    println(Euler13 resolve)
+    //    println(Euler13 resolve)
+    println(Euler14 resolve)
+  }
+}
+
+object Euler14 {
+  def seriesLen(n: Long, len: Int = 1): Long = {
+    if (n == 1) len
+    else if (n % 2 == 0) seriesLen(n / 2, len + 1)
+    else seriesLen(3 * n + 1, len + 1)
+  }
+
+  def resolve = {
+    (1 until 1000000).map(seriesLen(_)).zipWithIndex.reduceLeft((max, next) => if (next._1 > max._1) next else max)._2+1
   }
 }
 
@@ -109,7 +122,7 @@ object Euler13 {
 20849603980134001723930671666823555245252804609722
 53503534226472524250874054075591789781264330331690"""
   def resolve = nums.lines.map(BigInt(_)).reduceLeft(_ + _)
-  
+
 }
 
 object Euler12 {
