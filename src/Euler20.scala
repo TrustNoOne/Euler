@@ -4,8 +4,17 @@ object Resolve20 {
     //    println(Euler11 resolve)
     //    println(Euler12 resolve)
     //    println(Euler13 resolve)
-    println(Euler14 resolve)
+    //    println(Euler14 resolve)
+    println(Euler15 resolve)
   }
+}
+
+object Euler15 {
+  def binomial(n: Long, k: Long): Long = {
+    (n - k + 1L to n).foldLeft(BigInt(1))(_ * _) / (2L to k).foldLeft(BigInt(1))(_ * _) toLong
+  }
+
+  def resolve = binomial(40, 20)
 }
 
 object Euler14 {
@@ -16,7 +25,7 @@ object Euler14 {
   }
 
   def resolve = {
-    (1 until 1000000).map(seriesLen(_)).zipWithIndex.reduceLeft((max, next) => if (next._1 > max._1) next else max)._2+1
+    (1 until 1000000).map(seriesLen(_)).zipWithIndex.reduceLeft((max, next) => if (next._1 > max._1) next else max)._2 + 1
   }
 }
 
