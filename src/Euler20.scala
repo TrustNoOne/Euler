@@ -5,8 +5,17 @@ object Resolve20 {
     //    println(Euler12 resolve)
     //    println(Euler13 resolve)
     //    println(Euler14 resolve)
-    println(Euler15 resolve)
+    println(Euler16 resolve)
   }
+}
+
+object Euler16 {
+  def sumDigits(n: BigInt, acc: BigInt = BigInt(0)): Long = {
+    if (n == 0) acc toLong
+    else sumDigits(n / 10, acc + n % 10)
+  }
+
+  def resolve = sumDigits(BigInt(1) << 1000)
 }
 
 object Euler15 {
