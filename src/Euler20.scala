@@ -1,15 +1,23 @@
 object Resolve20 {
   def main(args: Array[String]) {
-    //    println(Euler11 resolve)
-    //    println(Euler12 resolve)
-    //    println(Euler13 resolve)
-    //    println(Euler14 resolve)
-    //    println(Euler15 resolve)
-    //    println(Euler16 resolve)
-    //    println(Euler17 resolve)
-    //    println(Euler18 resolve)
-    println(Euler19 resolve)
+    println("11: " + (Euler11 resolve))
+    println("12: " + (Euler12 resolve))
+    println("13: " + (Euler13 resolve))
+    println("14: " + (Euler14 resolve))
+    println("15: " + (Euler15 resolve))
+    println("16: " + (Euler16 resolve))
+    println("17: " + (Euler17 resolve))
+    println("18: " + (Euler18 resolve))
+    println("19: " + (Euler19 resolve))
+    println("20: " + (Euler20 resolve))
   }
+}
+
+object Euler20 {
+  def fact(n: Int, acc: BigInt = 1): BigInt =
+    if (n == 1) acc else fact(n - 1, acc * n)
+
+  def resolve = Euler16.sumDigits(fact(100))
 }
 
 object Euler19 {
