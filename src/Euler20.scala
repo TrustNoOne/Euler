@@ -1,4 +1,3 @@
-
 object Resolve20 {
   def main(args: Array[String]) {
     //    println(Euler11 resolve)
@@ -8,7 +7,24 @@ object Resolve20 {
     //    println(Euler15 resolve)
     //    println(Euler16 resolve)
     //    println(Euler17 resolve)
-    println(Euler18 resolve)
+    //    println(Euler18 resolve)
+    println(Euler19 resolve)
+  }
+}
+
+object Euler19 {
+  import java.util._
+  import Calendar._
+  def resolve = { //procedural...
+    val currDate = new GregorianCalendar(1901, JANUARY, 1)
+    val endDate = new GregorianCalendar(2001, JANUARY, 1)
+    var count = 0
+    while (currDate.before(endDate)) {
+      if (currDate.get(DAY_OF_WEEK) == 1 && currDate.get(DAY_OF_MONTH) == 1)
+        count = count + 1
+      currDate.add(DAY_OF_YEAR, 1)
+    }
+    count
   }
 }
 
@@ -18,7 +34,7 @@ object Euler18 { //Ok for Euler67 too
     val src = Source.fromFile("./triangle17.txt")
     val tree = src.getLines.map { _.split(" ").map(_.toInt) }.toIndexedSeq
     src.close
-    
+
     val numLines = tree.size
     val lengthTo = for (i <- 1 to numLines) yield Array.ofDim[Int](i)
 
@@ -26,12 +42,12 @@ object Euler18 { //Ok for Euler67 too
       case (row, i) if i < numLines - 1 =>
         row.zipWithIndex foreach {
           case (el, j) =>
-            lengthTo(i+1)(j) = math.max(lengthTo(i+1)(j), lengthTo(i)(j) + tree(i + 1)(j))
-            lengthTo(i+1)(j+1) = math.max(lengthTo(i+1)(j+1), lengthTo(i)(j) + tree(i + 1)(j + 1))
+            lengthTo(i + 1)(j) = math.max(lengthTo(i + 1)(j), lengthTo(i)(j) + tree(i + 1)(j))
+            lengthTo(i + 1)(j + 1) = math.max(lengthTo(i + 1)(j + 1), lengthTo(i)(j) + tree(i + 1)(j + 1))
         }
       /* last line ignored*/ case _ =>
     }
-    
+
     lengthTo.flatten.max + tree(0)(0)
   }
 }
