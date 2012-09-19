@@ -1,7 +1,7 @@
 object Resolve30 {
   def main(args: Array[String]) {
-    println("21: " + (Euler21 resolve))
-    //    println("22: " + (Euler22 resolve))
+    //    println("21: " + (Euler21 resolve))
+    println("22: " + (Euler22 resolve))
     //    println("23: " + (Euler23 resolve))
     //    println("24: " + (Euler24 resolve))
     //    println("25: " + (Euler25 resolve))
@@ -13,14 +13,26 @@ object Resolve30 {
   }
 }
 
+object Euler22 {
+  def alphabeticalValue(s: String) = s.foldLeft(0)(_ + _.toInt - 64)
+  def resolve = {
+    val file = io.Source.fromFile("names.txt")
+    val list = file.mkString.replaceAll("\"", "").split(",")
+    file.close
+    list.sorted.zipWithIndex.foldLeft(0) {
+      (acc, nameIdx) => acc + alphabeticalValue(nameIdx._1) * (nameIdx._2 + 1)
+    }
+  }
+}
+
 object Euler21 {
   def divisors(n: Int) = (1 to n / 2) filter { n % _ == 0 }
-  
+
   def resolve = {
     val sumOfDivisors = (2 to 10000).par map { divisors(_).sum }
     val amicable = sumOfDivisors.zipWithIndex.filter {
       case (v, i) =>
-        v > 1 && v <= 10000 && v != i+2 && i + 2 == sumOfDivisors(v - 2)
+        v > 1 && v <= 10000 && v != i + 2 && i + 2 == sumOfDivisors(v - 2)
     }.unzip._1
     amicable.sum
   }
