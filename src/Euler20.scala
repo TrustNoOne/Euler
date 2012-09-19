@@ -7,7 +7,32 @@ object Resolve20 {
     //    println(Euler14 resolve)
     //    println(Euler15 resolve)
     //    println(Euler16 resolve)
-    println(Euler17 resolve)
+    //    println(Euler17 resolve)
+    println(Euler18 resolve)
+  }
+}
+
+object Euler18 { //Ok for Euler67 too 
+  def resolve = {
+    import scala.io.Source
+    val src = Source.fromFile("./triangle17.txt")
+    val tree = src.getLines.map { _.split(" ").map(_.toInt) }.toIndexedSeq
+    src.close
+    
+    val numLines = tree.size
+    val lengthTo = for (i <- 1 to numLines) yield Array.ofDim[Int](i)
+
+    tree.zipWithIndex foreach {
+      case (row, i) if i < numLines - 1 =>
+        row.zipWithIndex foreach {
+          case (el, j) =>
+            lengthTo(i+1)(j) = math.max(lengthTo(i+1)(j), lengthTo(i)(j) + tree(i + 1)(j))
+            lengthTo(i+1)(j+1) = math.max(lengthTo(i+1)(j+1), lengthTo(i)(j) + tree(i + 1)(j + 1))
+        }
+      /* last line ignored*/ case _ =>
+    }
+    
+    lengthTo.flatten.max + tree(0)(0)
   }
 }
 
