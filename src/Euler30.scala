@@ -1,8 +1,8 @@
 object Resolve30 {
   def main(args: Array[String]) {
     //    println("21: " + (Euler21 resolve))
-    println("22: " + (Euler22 resolve))
-    //    println("23: " + (Euler23 resolve))
+    //    println("22: " + (Euler22 resolve))
+        println("23: " + (Euler23 resolve))
     //    println("24: " + (Euler24 resolve))
     //    println("25: " + (Euler25 resolve))
     //    println("26: " + (Euler26 resolve))
@@ -10,6 +10,17 @@ object Resolve30 {
     //    println("28: " + (Euler28 resolve))
     //    println("29: " + (Euler29 resolve))
     //    println("30: " + (Euler30 resolve))
+  }
+}
+
+object Euler23 {
+  import Euler21.divisors
+  def resolve = {
+    val abundants = (1 to 28123).filter(i => divisors(i).sum > i)
+    val sums = collection.mutable.Set.empty[Int]
+    for (x <- abundants; y <- abundants) if (x + y <= 28123) sums += x + y
+
+    (1 to 28123).filterNot(sums.contains).sum
   }
 }
 
