@@ -2,8 +2,8 @@ object Resolve30 {
   def main(args: Array[String]) {
     //    println("21: " + (Euler21 resolve))
     //    println("22: " + (Euler22 resolve))
-        println("23: " + (Euler23 resolve))
-    //    println("24: " + (Euler24 resolve))
+    //    println("23: " + (Euler23 resolve))
+    println("24: " + (Euler24 resolve))
     //    println("25: " + (Euler25 resolve))
     //    println("26: " + (Euler26 resolve))
     //    println("27: " + (Euler27 resolve))
@@ -11,6 +11,31 @@ object Resolve30 {
     //    println("29: " + (Euler29 resolve))
     //    println("30: " + (Euler30 resolve))
   }
+}
+
+object Euler24 {
+  def fact(n: Int, acc: Int = 1): Int = {
+    if (n == 1) acc
+    else fact(n - 1, acc * n)
+  }
+
+  def res(_idx: Int, numElems: Int) = {
+    import scala.collection.mutable.ListBuffer
+    val idx = _idx - 1 /*1-based*/
+    var remain: Int = idx
+    var elems = ListBuffer.range(0, numElems)
+    (0 until numElems) map { i =>
+      if (remain == 0) elems.remove(0)
+      else {
+        val currFact = fact(elems.size - 1)
+        val nextDigitIdx = remain / currFact
+        remain %= currFact
+        elems.remove(nextDigitIdx)
+      }
+    }
+  }
+
+  def resolve = res(1000000, 10).mkString
 }
 
 object Euler23 {
