@@ -4,8 +4,8 @@ object Resolve30 {
     //    println("22: " + (Euler22 resolve))
     //    println("23: " + (Euler23 resolve))
     //    println("24: " + (Euler24 resolve))
-    println("25: " + (Euler25 resolve))
-    //    println("26: " + (Euler26 resolve))
+    //    println("25: " + (Euler25 resolve))
+    println("26: " + (Euler26 resolve))
     //    println("27: " + (Euler27 resolve))
     //    println("28: " + (Euler28 resolve))
     //    println("29: " + (Euler29 resolve))
@@ -13,11 +13,32 @@ object Resolve30 {
   }
 }
 
+object Euler26 {
+  def decimals(n: Int, d: Int): Stream[(Int, Int)] = {
+    if (n == 0) Stream.empty
+    else ((n % d * 10 / d), n % d) #:: decimals(n % d * 10, d)
+  }
+
+  def repeatingDecimals(n: Int, d: Int): List[Int] = {
+    var remainders: List[Int] = Nil
+    var remainIdx: Int = 0
+    val repeating = decimals(n, d) takeWhile { x =>
+      remainIdx = remainders.indexOf(x._2)
+      remainders ::= x._2
+      remainIdx < 0
+    }
+    repeating.map(_._1).toList.takeRight(remainIdx + 1)
+  }
+
+  def resolve = (2 until 1000).map(repeatingDecimals(1, _).size).zipWithIndex.max._2 + 2
+
+}
+
 object Euler25 {
   def fibWithDigits(numDigits: Int) = {
-    def fibWithDigitsTr(curr: BigInt, prev: BigInt, idx:BigInt): BigInt = curr match {
-      case x if x.toString.length >= numDigits => idx+1
-      case _ => fibWithDigitsTr(curr + prev, curr, idx+1)
+    def fibWithDigitsTr(curr: BigInt, prev: BigInt, idx: BigInt): BigInt = curr match {
+      case x if x.toString.length >= numDigits => idx + 1
+      case _ => fibWithDigitsTr(curr + prev, curr, idx + 1)
     }
     fibWithDigitsTr(1, 1, 1)
   }
