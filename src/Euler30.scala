@@ -7,9 +7,16 @@ object Resolve30 {
     //    println("25: " + (Euler25 resolve))
     //    println("26: " + (Euler26 resolve))
     //    println("27: " + (Euler27 resolve))
-    println("28: " + (Euler28 resolve))
-    //    println("29: " + (Euler29 resolve))
+    //    println("28: " + (Euler28 resolve))
+    println("29: " + (Euler29 resolve))
     //    println("30: " + (Euler30 resolve))
+  }
+}
+
+object Euler29 {
+  def resolve = {
+    val pows = for (a <- 2 to 100; b <- 2 to 100) yield math.pow(a, b)
+    Set(pows: _*).size
   }
 }
 
