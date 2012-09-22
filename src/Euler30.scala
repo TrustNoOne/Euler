@@ -1,15 +1,25 @@
 object Resolve30 {
   def main(args: Array[String]) {
-    //    println("21: " + (Euler21 resolve))
-    //    println("22: " + (Euler22 resolve))
-    //    println("23: " + (Euler23 resolve))
-    //    println("24: " + (Euler24 resolve))
-    //    println("25: " + (Euler25 resolve))
-    //    println("26: " + (Euler26 resolve))
-    //    println("27: " + (Euler27 resolve))
-    //    println("28: " + (Euler28 resolve))
+    println("21: " + (Euler21 resolve))
+    println("22: " + (Euler22 resolve))
+    println("23: " + (Euler23 resolve))
+    println("24: " + (Euler24 resolve))
+    println("25: " + (Euler25 resolve))
+    println("26: " + (Euler26 resolve))
+    println("27: " + (Euler27 resolve))
+    println("28: " + (Euler28 resolve))
     println("29: " + (Euler29 resolve))
-    //    println("30: " + (Euler30 resolve))
+    println("30: " + (Euler30 resolve))
+  }
+}
+
+object Euler30 {
+  def resolve = { // 9^5*6 = 354294 (6 digits)
+    val nums = for (d1 <- 0 to 9; d2 <- 0 to 9; d3 <- 0 to 9; d4 <- 0 to 9; d5 <- 0 to 9; d6 <- 0 to 9)
+      yield (d1 + d2 * 10 + d3 * 100 + d4 * 1000 + d5 * 10000 + d6 * 100000,
+      d1 * d1 * d1 * d1 * d1 + d2 * d2 * d2 * d2 * d2 + d3 * d3 * d3 * d3 * d3 +
+      d4 * d4 * d4 * d4 * d4 + d5 * d5 * d5 * d5 * d5 + d6 * d6 * d6 * d6 * d6)
+    nums.filter(x => x._1 == x._2).map(_._1).filter(n => n != 0 && n != 1).sum
   }
 }
 
