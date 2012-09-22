@@ -5,11 +5,22 @@ object Resolve30 {
     //    println("23: " + (Euler23 resolve))
     //    println("24: " + (Euler24 resolve))
     //    println("25: " + (Euler25 resolve))
-    println("26: " + (Euler26 resolve))
-    //    println("27: " + (Euler27 resolve))
+    //    println("26: " + (Euler26 resolve))
+    println("27: " + (Euler27 resolve))
     //    println("28: " + (Euler28 resolve))
     //    println("29: " + (Euler29 resolve))
     //    println("30: " + (Euler30 resolve))
+  }
+}
+
+object Euler27 {
+  def isPrime(n: Int) = n > 1 && (2L to math.sqrt(n).toInt forall (n % _ > 0))
+
+  def resolve = {
+    val numPrimes = for (a <- Range(-999, 999).view; b <- Range(-999, 999).view)
+      yield (Stream.from(0).map(n => n * n + a * n + b).takeWhile(isPrime).size, a, b)
+    val maxNumPrimes = numPrimes.maxBy(_._1)
+    maxNumPrimes._2 * maxNumPrimes._3
   }
 }
 
