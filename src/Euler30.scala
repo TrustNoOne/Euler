@@ -6,11 +6,19 @@ object Resolve30 {
     //    println("24: " + (Euler24 resolve))
     //    println("25: " + (Euler25 resolve))
     //    println("26: " + (Euler26 resolve))
-    println("27: " + (Euler27 resolve))
-    //    println("28: " + (Euler28 resolve))
+    //    println("27: " + (Euler27 resolve))
+    println("28: " + (Euler28 resolve))
     //    println("29: " + (Euler29 resolve))
     //    println("30: " + (Euler30 resolve))
   }
+}
+
+object Euler28 {
+  def corners: Stream[(Int, Int, Int, Int)] = (0, 0, 0, 1) #:: Stream.from(1).zip(corners).map { n =>
+    (n._2._4 + 2 * n._1, n._2._4 + 4 * n._1, n._2._4 + 6 * n._1, n._2._4 + 8 * n._1)
+  }
+
+  def resolve = corners.take(501).foldLeft(0)((sum, c) => sum + c._1 + c._2 + c._3 + c._4)
 }
 
 object Euler27 {
