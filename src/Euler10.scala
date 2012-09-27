@@ -1,12 +1,14 @@
+import Euler._
+
 object Resolve10 {
   def main(args: Array[String]) {
-    println("4: " + (Euler4 resolve))
-    println("5: " + (Euler5 resolve))
-    println("6: " + (Euler6 resolve))
-    println("7: " + (Euler7 resolve))
-    println("8: " + (Euler8 resolve))
-    println("9: " + (Euler9 resolve))
-    println("10: " + (Euler10 resolve))
+    println("4: " + elapsed(Euler4 resolve))
+    println("5: " + elapsed(Euler5 resolve))
+    println("6: " + elapsed(Euler6 resolve))
+    println("7: " + elapsed(Euler7 resolve))
+    println("8: " + elapsed(Euler8 resolve))
+    println("9: " + elapsed(Euler9 resolve))
+    println("10: " + elapsed(Euler10 resolve))
   }
 }
 

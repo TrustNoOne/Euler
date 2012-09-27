@@ -1,15 +1,17 @@
+import Euler._
+
 object Resolve20 {
   def main(args: Array[String]) {
-    println("11: " + (Euler11 resolve))
-    println("12: " + (Euler12 resolve))
-    println("13: " + (Euler13 resolve))
-    println("14: " + (Euler14 resolve))
-    println("15: " + (Euler15 resolve))
-    println("16: " + (Euler16 resolve))
-    println("17: " + (Euler17 resolve))
-    println("18: " + (Euler18 resolve))
-    println("19: " + (Euler19 resolve))
-    println("20: " + (Euler20 resolve))
+    println("11: " + elapsed(Euler11 resolve))
+    println("12: " + elapsed(Euler12 resolve))
+    println("13: " + elapsed(Euler13 resolve))
+    println("14: " + elapsed(Euler14 resolve))
+    println("15: " + elapsed(Euler15 resolve))
+    println("16: " + elapsed(Euler16 resolve))
+    println("17: " + elapsed(Euler17 resolve))
+    println("18: " + elapsed(Euler18 resolve))
+    println("19: " + elapsed(Euler19 resolve))
+    println("20: " + elapsed(Euler20 resolve))
   }
 }
 
