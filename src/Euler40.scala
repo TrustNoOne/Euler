@@ -1,17 +1,17 @@
 import Euler._
 
-object Resolve40 {
+object Euler31to40 {
   def main(args: Array[String]) {
-    println("31: " + elapsed(Euler31 resolve))
-    //    println("32: " + (Euler32 resolve))
-    //    println("33: " + (Euler33 resolve))
-    //    println("34: " + (Euler34 resolve))
-    //    println("35: " + (Euler35 resolve))
-    //    println("36: " + (Euler36 resolve))
-    //    println("37: " + (Euler37 resolve))
-    //    println("38: " + (Euler38 resolve))
-    //    println("39: " + (Euler39 resolve))
-    //    println("40: " + (Euler40 resolve))
+    println("31: " + elapsed(Euler31.solve))
+    //    println("32: " + (Euler32.solve))
+    //    println("33: " + (Euler33.solve))
+    //    println("34: " + (Euler34.solve))
+    //    println("35: " + (Euler35.solve))
+    //    println("36: " + (Euler36.solve))
+    //    println("37: " + (Euler37.solve))
+    //    println("38: " + (Euler38.solve))
+    //    println("39: " + (Euler39.solve))
+    //    println("40: " + (Euler40.solve))
   }
 }
 
@@ -25,6 +25,6 @@ object Euler31 {
     }
   }
 
-  def resolve = subprob(0, 200)
+  def solve = subprob(0, 200)
 }
 

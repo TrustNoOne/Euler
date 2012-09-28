@@ -1,24 +1,24 @@
 import Euler._
 
-object Resolve10 {
+object Euler1to10 {
   def main(args: Array[String]) {
-    println("4: " + elapsed(Euler4 resolve))
-    println("5: " + elapsed(Euler5 resolve))
-    println("6: " + elapsed(Euler6 resolve))
-    println("7: " + elapsed(Euler7 resolve))
-    println("8: " + elapsed(Euler8 resolve))
-    println("9: " + elapsed(Euler9 resolve))
-    println("10: " + elapsed(Euler10 resolve))
+    println("4: " + elapsed(Euler4.solve))
+    println("5: " + elapsed(Euler5.solve))
+    println("6: " + elapsed(Euler6.solve))
+    println("7: " + elapsed(Euler7.solve))
+    println("8: " + elapsed(Euler8.solve))
+    println("9: " + elapsed(Euler9.solve))
+    println("10: " + elapsed(Euler10.solve))
   }
 }
 
 object Euler10 {
-  def resolve = 2L to 2000000L filter (Euler7.isPrime(_)) reduceLeft (_ + _)
+  def solve = 2L to 2000000L filter (Euler7.isPrime(_)) reduceLeft (_ + _)
 }
 
 object Euler9 {
   import scala.math.sqrt
-  def resolve = {
+  def solve = {
     for (a <- 2 to 999; b <- a + 1 to 999 if a + b < 1000 if a + b + sqrt(a * a + b * b) == 1000)
       yield (a, b, sqrt(a * a + b * b))
   }
@@ -46,7 +46,7 @@ object Euler8 {
 05886116467109405077541002256983155200055935729725
 71636269561882670428252483600823257530420752963450""".replace("\n", "")
 
-  def resolve = {
+  def solve = {
     (number.toList.sliding(5) map (
       _.foldLeft(1)((a, b) => a * (b - 48)))).toList.max
   }
@@ -63,13 +63,13 @@ object Euler7 {
     else buildPrime(count, n + 1)
   }
 
-  def resolve = {
+  def solve = {
     buildPrime(1, 2)
   }
 }
 
 object Euler6 {
-  def resolve = {
+  def solve = {
     val n = 100
     val sum = (n * (n + 1)) / 2
     val squareOfSum = sum * sum
@@ -79,7 +79,7 @@ object Euler6 {
 }
 
 object Euler5 {
-  def resolve = {
+  def solve = {
     val divisors = List(20, 19, 18, 17, 16, 15, 14, 13, 12, 11)
     def go(n: Int): Int = {
       if (divisors forall (n % _ == 0)) n
@@ -92,7 +92,7 @@ object Euler5 {
 object Euler4 {
   def isPalindrome(n: Int) = (n toString (), n toString () reverse).zipped forall (_ == _)
 
-  def resolve = {
+  def solve = {
     var max = (0, 0, 0)
     for (i <- 100 to 999; j <- i to 999) {
       val n = i * j

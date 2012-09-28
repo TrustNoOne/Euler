@@ -1,22 +1,22 @@
 import Euler._
 
-object Resolve30 {
+object Euler21to30 {
   def main(args: Array[String]) {
-    println("21: " + elapsed(Euler21 resolve))
-    println("22: " + elapsed(Euler22 resolve))
-    println("23: " + elapsed(Euler23 resolve))
-    println("24: " + elapsed(Euler24 resolve))
-    println("25: " + elapsed(Euler25 resolve))
-    println("26: " + elapsed(Euler26 resolve))
-    println("27: " + elapsed(Euler27 resolve))
-    println("28: " + elapsed(Euler28 resolve))
-    println("29: " + elapsed(Euler29 resolve))
-    println("30: " + elapsed(Euler30 resolve))
+    println("21: " + elapsed(Euler21.solve))
+    println("22: " + elapsed(Euler22.solve))
+    println("23: " + elapsed(Euler23.solve))
+    println("24: " + elapsed(Euler24.solve))
+    println("25: " + elapsed(Euler25.solve))
+    println("26: " + elapsed(Euler26.solve))
+    println("27: " + elapsed(Euler27.solve))
+    println("28: " + elapsed(Euler28.solve))
+    println("29: " + elapsed(Euler29.solve))
+    println("30: " + elapsed(Euler30.solve))
   }
 }
 
 object Euler30 {
-  def resolve = { // 9^5*6 = 354294 (6 digits)
+  def solve = { // 9^5*6 = 354294 (6 digits)
     val nums = for (d1 <- 0 to 9; d2 <- 0 to 9; d3 <- 0 to 9; d4 <- 0 to 9; d5 <- 0 to 9; d6 <- 0 to 9)
       yield (d1 + d2 * 10 + d3 * 100 + d4 * 1000 + d5 * 10000 + d6 * 100000,
       d1 * d1 * d1 * d1 * d1 + d2 * d2 * d2 * d2 * d2 + d3 * d3 * d3 * d3 * d3 +
@@ -26,7 +26,7 @@ object Euler30 {
 }
 
 object Euler29 {
-  def resolve = {
+  def solve = {
     val pows = for (a <- 2 to 100; b <- 2 to 100) yield math.pow(a, b)
     Set(pows: _*).size
   }
@@ -37,13 +37,13 @@ object Euler28 {
     (n._2._4 + 2 * n._1, n._2._4 + 4 * n._1, n._2._4 + 6 * n._1, n._2._4 + 8 * n._1)
   }
 
-  def resolve = corners.take(501).foldLeft(0)((sum, c) => sum + c._1 + c._2 + c._3 + c._4)
+  def solve = corners.take(501).foldLeft(0)((sum, c) => sum + c._1 + c._2 + c._3 + c._4)
 }
 
 object Euler27 {
   def isPrime(n: Int) = n > 1 && (2L to math.sqrt(n).toInt forall (n % _ > 0))
 
-  def resolve = {
+  def solve = {
     val numPrimes = for (a <- Range(-999, 999).view; b <- Range(-999, 999).view)
       yield (Stream.from(0).map(n => n * n + a * n + b).takeWhile(isPrime).size, a, b)
     val maxNumPrimes = numPrimes.maxBy(_._1)
@@ -68,7 +68,7 @@ object Euler26 {
     repeating.map(_._1).toList.takeRight(remainIdx + 1)
   }
 
-  def resolve = (2 until 1000).map(repeatingDecimals(1, _).size).zipWithIndex.max._2 + 2
+  def solve = (2 until 1000).map(repeatingDecimals(1, _).size).zipWithIndex.max._2 + 2
 
 }
 
@@ -81,7 +81,7 @@ object Euler25 {
     fibWithDigitsTr(1, 1, 1)
   }
 
-  def resolve = fibWithDigits(1000)
+  def solve = fibWithDigits(1000)
 }
 
 object Euler24 {
@@ -106,12 +106,12 @@ object Euler24 {
     }
   }
 
-  def resolve = res(1000000, 10).mkString
+  def solve = res(1000000, 10).mkString
 }
 
 object Euler23 {
   import Euler21.divisors
-  def resolve = {
+  def solve = {
     val abundants = (1 to 28123).filter(i => divisors(i).sum > i)
     val sums = collection.mutable.Set.empty[Int]
     for (x <- abundants; y <- abundants) if (x + y <= 28123) sums += x + y
@@ -122,7 +122,7 @@ object Euler23 {
 
 object Euler22 {
   def alphabeticalValue(s: String) = s.foldLeft(0)(_ + _.toInt - 64)
-  def resolve = {
+  def solve = {
     val file = io.Source.fromFile("names.txt")
     val list = file.mkString.replaceAll("\"", "").split(",")
     file.close
@@ -135,7 +135,7 @@ object Euler22 {
 object Euler21 {
   def divisors(n: Int) = (1 to n / 2) filter { n % _ == 0 }
 
-  def resolve = {
+  def solve = {
     val sumOfDivisors = (2 to 10000).par map { divisors(_).sum }
     val amicable = sumOfDivisors.zipWithIndex.filter {
       case (v, i) =>

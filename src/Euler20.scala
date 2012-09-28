@@ -1,17 +1,17 @@
 import Euler._
 
-object Resolve20 {
+object Euler11to20 {
   def main(args: Array[String]) {
-    println("11: " + elapsed(Euler11 resolve))
-    println("12: " + elapsed(Euler12 resolve))
-    println("13: " + elapsed(Euler13 resolve))
-    println("14: " + elapsed(Euler14 resolve))
-    println("15: " + elapsed(Euler15 resolve))
-    println("16: " + elapsed(Euler16 resolve))
-    println("17: " + elapsed(Euler17 resolve))
-    println("18: " + elapsed(Euler18 resolve))
-    println("19: " + elapsed(Euler19 resolve))
-    println("20: " + elapsed(Euler20 resolve))
+    println("11: " + elapsed(Euler11.solve))
+    println("12: " + elapsed(Euler12.solve))
+    println("13: " + elapsed(Euler13.solve))
+    println("14: " + elapsed(Euler14.solve))
+    println("15: " + elapsed(Euler15.solve))
+    println("16: " + elapsed(Euler16.solve))
+    println("17: " + elapsed(Euler17.solve))
+    println("18: " + elapsed(Euler18.solve))
+    println("19: " + elapsed(Euler19.solve))
+    println("20: " + elapsed(Euler20.solve))
   }
 }
 
@@ -19,13 +19,13 @@ object Euler20 {
   def fact(n: Int, acc: BigInt = 1): BigInt =
     if (n == 1) acc else fact(n - 1, acc * n)
 
-  def resolve = Euler16.sumDigits(fact(100))
+  def solve = Euler16.sumDigits(fact(100))
 }
 
 object Euler19 {
   import java.util._
   import Calendar._
-  def resolve = { //procedural...
+  def solve = { //procedural...
     val currDate = new GregorianCalendar(1901, JANUARY, 1)
     val endDate = new GregorianCalendar(2001, JANUARY, 1)
     var count = 0
@@ -39,7 +39,7 @@ object Euler19 {
 }
 
 object Euler18 { //Ok for Euler67 too 
-  def resolve = {
+  def solve = {
     import scala.io.Source
     val src = Source.fromFile("./triangle17.txt")
     val tree = src.getLines.map { _.split(" ").map(_.toInt) }.toIndexedSeq
@@ -63,7 +63,7 @@ object Euler18 { //Ok for Euler67 too
 }
 
 object Euler17 {
-  def resolve = {
+  def solve = {
     //one two three four five six seven eight nine
     val OneToNine = 3 + 3 + 5 + 4 + 4 + 3 + 5 + 5 + 4
     //eleven twelve thirteen fourteen fifteen sixteen seventeen eighteen nineteen
@@ -108,7 +108,7 @@ object Euler16 {
     else sumDigits(n / 10, acc + n % 10)
   }
 
-  def resolve = sumDigits(BigInt(1) << 1000)
+  def solve = sumDigits(BigInt(1) << 1000)
 }
 
 object Euler15 {
@@ -116,7 +116,7 @@ object Euler15 {
     (n - k + 1L to n).foldLeft(BigInt(1))(_ * _) / (2L to k).foldLeft(BigInt(1))(_ * _) toLong
   }
 
-  def resolve = binomial(40, 20)
+  def solve = binomial(40, 20)
 }
 
 object Euler14 {
@@ -126,7 +126,7 @@ object Euler14 {
     else seriesLen(3 * n + 1, len + 1)
   }
 
-  def resolve = {
+  def solve = {
     (1 until 1000000).map(seriesLen(_)).zipWithIndex.reduceLeft((max, next) => if (next._1 > max._1) next else max)._2 + 1
   }
 }
@@ -232,7 +232,7 @@ object Euler13 {
 72107838435069186155435662884062257473692284509516
 20849603980134001723930671666823555245252804609722
 53503534226472524250874054075591789781264330331690"""
-  def resolve = nums.lines.map(BigInt(_)).reduceLeft(_ + _)
+  def solve = nums.lines.map(BigInt(_)).reduceLeft(_ + _)
 
 }
 
@@ -243,7 +243,7 @@ object Euler12 {
     else numDivisors(n, curr + 1, 0, acc * (cnt + 1))
   }
 
-  def resolve = {
+  def solve = {
     var i = 1
     while (numDivisors(i * (i + 1) / 2) <= 500) i += 1
     i * (i + 1) / 2
@@ -251,7 +251,7 @@ object Euler12 {
 }
 
 object Euler11 {
-  def resolve = {
+  def solve = {
     val l = List(List(8, 02, 22, 97, 38, 15, 00, 40, 00, 75, 04, 05, 07, 78, 52, 12, 50, 77, 91, 8),
       List(49, 49, 99, 40, 17, 81, 18, 57, 60, 87, 17, 40, 98, 43, 69, 48, 04, 56, 62, 00),
       List(81, 49, 31, 73, 55, 79, 14, 29, 93, 71, 40, 67, 53, 88, 30, 03, 49, 13, 36, 65),
