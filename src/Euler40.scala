@@ -3,8 +3,8 @@ import Euler._
 object Euler31to40 {
   def main(args: Array[String]) {
     //    println("31: " + elapsed(Euler31.solve))
-    println("32: " + elapsed(Euler32.solve))
-    //    println("33: " + elapsed(Euler33.solve))
+    //    println("32: " + elapsed(Euler32.solve))
+    println("33: " + elapsed(Euler33.solve))
     //    println("34: " + elapsed(Euler34.solve))
     //    println("35: " + elapsed(Euler35.solve))
     //    println("36: " + elapsed(Euler36.solve))
@@ -12,6 +12,17 @@ object Euler31to40 {
     //    println("38: " + elapsed(Euler38.solve))
     //    println("39: " + elapsed(Euler39.solve))
     //    println("40: " + elapsed(Euler40.solve))
+  }
+}
+
+object Euler33 {
+  def solve = {
+    val curiousFrac = for ( // nx/xd = n/d already 4, no need to check xn/dx etc
+      x <- 1 to 9; n <- 0 to 9; d <- 1 to 9 if (n < x || n == x && x < d) &&
+        (n * 10 + x) * d == n * (x * 10 + d)
+    ) yield ((n * 10 + x), (x * 10 + d))
+    val curiousProd = curiousFrac.reduceLeft((prod, x) => (prod._1 * x._1, prod._2 * x._2))
+    curiousProd._2 / curiousProd._1 // it's 100, no need to simplify
   }
 }
 
