@@ -17,7 +17,7 @@ object Euler11to20 {
 
 object Euler20 {
   def fact(n: Int, acc: BigInt = 1): BigInt =
-    if (n == 1) acc else fact(n - 1, acc * n)
+    if (n <= 1) acc else fact(n - 1, acc * n)
 
   def solve = Euler16.sumDigits(fact(100))
 }
