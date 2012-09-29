@@ -4,14 +4,24 @@ object Euler31to40 {
   def main(args: Array[String]) {
     //    println("31: " + elapsed(Euler31.solve))
     //    println("32: " + elapsed(Euler32.solve))
-    println("33: " + elapsed(Euler33.solve))
-    //    println("34: " + elapsed(Euler34.solve))
+    //    println("33: " + elapsed(Euler33.solve))
+    println("34: " + elapsed(Euler34.solve))
     //    println("35: " + elapsed(Euler35.solve))
     //    println("36: " + elapsed(Euler36.solve))
     //    println("37: " + elapsed(Euler37.solve))
     //    println("38: " + elapsed(Euler38.solve))
     //    println("39: " + elapsed(Euler39.solve))
     //    println("40: " + elapsed(Euler40.solve))
+  }
+}
+
+object Euler34 {
+  def solve = {
+    val factorials = 0 to 9 map (n => fact(n).toInt)
+    (1 to factorials.sum) filter { n =>
+      val digits = toDigits(n)
+      digits.size > 1 && n == digits.map(factorials).sum
+    } sum
   }
 }
 
