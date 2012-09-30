@@ -13,8 +13,8 @@ object Euler {
   def combine[A](xs: Traversable[Traversable[A]]): Seq[Seq[A]] =
     xs.foldLeft(Seq(Seq.empty[A]))((x, y) => for (a <- x.view; b <- y) yield a :+ b)
 
-  def toDigits(n: Int): Seq[Int] =
-    if (n < 10) Seq(n) else (n % 10) +: toDigits(n / 10)
+  def toDigits(n: Int, base: Int = 10): Seq[Int] =
+    if (n < base) Seq(n) else (n % base) +: toDigits(n / base, base)
 
   def fromDigits(xs: Seq[Int]): Int =
     xs.foldLeft((1, 0))((a, b) => (a._1 * 10, a._2 + a._1 * b))._2
