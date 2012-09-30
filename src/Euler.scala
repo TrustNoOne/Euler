@@ -19,4 +19,12 @@ object Euler {
   def fromDigits(xs: Seq[Int]): Int =
     xs.foldLeft((1, 0))((a, b) => (a._1 * 10, a._2 + a._1 * b))._2
 
+  def isPrime(n: Long) = {
+    2L to math.sqrt(n).toLong forall (n % _ > 0)
+  }
+
+  def isPrime(n: Int) = {
+    2 to math.sqrt(n).toInt forall (n % _ > 0)
+  }
+
 }

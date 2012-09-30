@@ -5,14 +5,27 @@ object Euler31to40 {
     //    println("31: " + elapsed(Euler31.solve))
     //    println("32: " + elapsed(Euler32.solve))
     //    println("33: " + elapsed(Euler33.solve))
-    println("34: " + elapsed(Euler34.solve))
-    //    println("35: " + elapsed(Euler35.solve))
+    //    println("34: " + elapsed(Euler34.solve))
+    println("35: " + elapsed(Euler35.solve))
     //    println("36: " + elapsed(Euler36.solve))
     //    println("37: " + elapsed(Euler37.solve))
     //    println("38: " + elapsed(Euler38.solve))
     //    println("39: " + elapsed(Euler39.solve))
     //    println("40: " + elapsed(Euler40.solve))
   }
+}
+
+object Euler35 {
+  def rotations(n: Int) = {
+    def rotStream(n: Int): Stream[Int] = {
+      val digits = toDigits(n)
+      val next = fromDigits(digits.tail :+ digits.head)
+      next #:: rotStream(next)
+    }
+    n #:: (rotStream(n) takeWhile (_ != n))
+  }
+
+  def solve = Range(3, 1000000, 2).filter(rotations(_) forall isPrime).size + 1 //2
 }
 
 object Euler34 {
