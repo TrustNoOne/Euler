@@ -8,20 +8,38 @@ object Euler31to40 {
     //    println("34: " + elapsed(Euler34.solve))
     //    println("35: " + elapsed(Euler35.solve))
     //    println("36: " + elapsed(Euler36.solve))
-    println("37: " + elapsed(Euler37.solve))
-    //    println("38: " + elapsed(Euler38.solve))
+    //    println("37: " + elapsed(Euler37.solve))
+    println("38: " + elapsed(Euler38.solve))
     //    println("39: " + elapsed(Euler39.solve))
     //    println("40: " + elapsed(Euler40.solve))
   }
 }
 
+object Euler38 {
+  def isConcProdPandigital(n: Int): Option[Int] = {
+    def calcPanRec(i: Int, res: Seq[Int]): Seq[Int] = res match {
+      case x if x.length >= 9 => x
+      case x => calcPanRec(i + 1, toDigits(n * i) ++: x)
+    }
+
+    val digits = calcPanRec(1, Nil)
+    val isPandigital = digits.length == 9 && !digits.contains(0) && digits.toSet.size == 9
+    if (isPandigital) Some(fromDigits(digits)) else None
+  }
+
+  def solve = {
+    val pandigits = (1 to 9999).par map isConcProdPandigital filter { _.isDefined } map { _.get }
+    pandigits.toList.sorted.last
+  }
+}
+
 object Euler37 {
   def solve = {
-    Stream.from(9,2).filter { n => 
+    Stream.from(9, 2).filter { n =>
       val lr = toDigits(n).scanLeft((1, 0))((s, x) => (s._1 * 10, s._2 + s._1 * x)).map(_._2).drop(1)
       val rl = toDigits(n).reverse.scanLeft(0)((s, x) => s * 10 + x).drop(1)
       (lr forall isPrime) && (rl forall isPrime)
-    } take(11) sum
+    } take (11) sum
   }
 }
 
