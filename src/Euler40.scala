@@ -2,22 +2,25 @@ import Euler._
 
 object Euler31to40 {
   def main(args: Array[String]) {
-    //    println("31: " + elapsed(Euler31.solve()))
-    //    println("32: " + elapsed(Euler32.solve()))
-    //    println("33: " + elapsed(Euler33.solve()))
-    //    println("34: " + elapsed(Euler34.solve()))
-    //    println("35: " + elapsed(Euler35.solve()))
-    //    println("36: " + elapsed(Euler36.solve()))
-    //    println("37: " + elapsed(Euler37.solve()))
-    //    println("38: " + elapsed(Euler38.solve()))
+    println("31: " + elapsed(Euler31.solve()))
+    println("32: " + elapsed(Euler32.solve()))
+    println("33: " + elapsed(Euler33.solve()))
+    println("34: " + elapsed(Euler34.solve()))
+    println("35: " + elapsed(Euler35.solve()))
+    println("36: " + elapsed(Euler36.solve()))
+    println("37: " + elapsed(Euler37.solve()))
+    println("38: " + elapsed(Euler38.solve()))
     println("39: " + elapsed(Euler39.solve()))
-    //    println("40: " + elapsed(Euler40.solve()))
+    println("40: " + elapsed(Euler40.solve()))
   }
 }
 
 object Euler40 {
   def solve() = {
-    ""
+    val champernowne = Iterator.from(1).flatMap(toDigits(_, 10).reverse)
+    champernowne.next() * champernowne.drop(8).next() * champernowne.drop(89).next() *
+      champernowne.drop(899).next() * champernowne.drop(8999).next() * champernowne.drop(89999).next() *
+      champernowne.drop(899999).next()
   }
 }
 
