@@ -2,8 +2,8 @@ import Euler._
 
 object Euler41to50 {
   def main(args: Array[String]) {
-    println("41: " + elapsed(Euler41.solve()))
-    //    println("42: " + elapsed(Euler42.solve()))
+    //    println("41: " + elapsed(Euler41.solve()))
+    println("42: " + elapsed(Euler42.solve()))
     //    println("43: " + elapsed(Euler43.solve()))
     //    println("44: " + elapsed(Euler44.solve()))
     //    println("45: " + elapsed(Euler45.solve()))
@@ -15,12 +15,22 @@ object Euler41to50 {
   }
 }
 
+object Euler42 {
+  def wordvalue(w: String) = w.foldLeft(0)(_ + _.toInt - 64)
+  def solve() = {
+    val file = io.Source.fromFile("words.txt")
+    val words = file.mkString.replaceAll("\"", "").split(",")
+    file.close
+    words.map(wordvalue).filter(isTriangular).length
+  }
+}
+
 object Euler41 {
   def solve() = {
     val digits = List(1L, 2L, 3L, 4L, 5L, 6L, 7L, 8L, 9L)
     val pandigitalPrimes = (1 to 9) flatMap { n =>
       digits.take(n).permutations.filter(fromDigits(_).isPrime).map(fromDigits)
-    } 
+    }
     pandigitalPrimes.sorted.last
   }
 }

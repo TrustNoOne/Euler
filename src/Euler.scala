@@ -22,7 +22,6 @@ object Euler {
   def toDigits(n: Long): Seq[Long] =
     if (n < 10) Seq(n) else (n % 10) +: toDigits(n / 10)
 
-  //TODO use Numeric[T]
   def fromDigits(xs: Seq[Int]): Int =
     xs.foldLeft((1, 0))((a, b) => (a._1 * 10, a._2 + a._1 * b))._2
   def fromDigits(xs: Seq[Long]): Long =
@@ -38,16 +37,25 @@ object Euler {
     else 2 to math.sqrt(n).toInt forall (n % _ > 0)
   }
 
+  def isPerfectSquare(n: Long) = math.sqrt(n) % 1 == 0
+  def isPerfectSquare(n: Int) = math.sqrt(n) % 1 == 0
+  def isTriangular(n: Int) = isPerfectSquare(8 * n + 1)
+  def isTriangular(n: Long) = isPerfectSquare(8 * n + 1)
+
   implicit class ExtInt(n: Int) {
     def isPrime = Euler.isPrime(n)
     def toDigits = Euler.toDigits(n)
     def toBinaryDigits = Euler.toBinaryDigits(n)
     def fact = Euler.fact(n)
+    def isPerfectSquare = Euler.isPerfectSquare(n)
+    def isTriangular = Euler.isTriangular(n)
   }
 
   implicit class ExtLong(n: Long) {
     def isPrime = Euler.isPrime(n)
     def toDigits = Euler.toDigits(n)
+    def isPerfectSquare = Euler.isPerfectSquare(n)
+    def isTriangular = Euler.isTriangular(n)
   }
 
 }
