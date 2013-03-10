@@ -13,11 +13,20 @@ object Euler {
   def combine[A](xs: Traversable[Traversable[A]]): Seq[Seq[A]] =
     xs.foldLeft(Seq(Seq.empty[A]))((x, y) => for (a <- x.view; b <- y) yield a :+ b)
 
-  def toDigits(n: Int, base: Int = 10): Seq[Int] =
-    if (n < base) Seq(n) else (n % base) +: toDigits(n / base, base)
+  def toDigits(n: Int): Seq[Int] =
+    if (n < 10) Seq(n) else (n % 10) +: toDigits(n / 10)
 
+  def toBinaryDigits(n: Int): Seq[Int] =
+    if (n < 2) Seq(n) else (n % 2) +: toDigits(n / 2)
+
+  def toDigits(n: Long): Seq[Long] =
+    if (n < 10) Seq(n) else (n % 10) +: toDigits(n / 10)
+
+  //TODO use Numeric[T]
   def fromDigits(xs: Seq[Int]): Int =
     xs.foldLeft((1, 0))((a, b) => (a._1 * 10, a._2 + a._1 * b))._2
+  def fromDigits(xs: Seq[Long]): Long =
+    xs.foldLeft((1L, 0L))((a, b) => (a._1 * 10, a._2 + a._1 * b))._2
 
   def isPrime(n: Long) = {
     if (n < 2) false
@@ -27,6 +36,18 @@ object Euler {
   def isPrime(n: Int) = {
     if (n < 2) false
     else 2 to math.sqrt(n).toInt forall (n % _ > 0)
+  }
+
+  implicit class ExtInt(n: Int) {
+    def isPrime = Euler.isPrime(n)
+    def toDigits = Euler.toDigits(n)
+    def toBinaryDigits = Euler.toBinaryDigits(n)
+    def fact = Euler.fact(n)
+  }
+
+  implicit class ExtLong(n: Long) {
+    def isPrime = Euler.isPrime(n)
+    def toDigits = Euler.toDigits(n)
   }
 
 }
