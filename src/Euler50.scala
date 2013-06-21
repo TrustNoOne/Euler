@@ -4,14 +4,31 @@ object Euler41to50 {
   def main(args: Array[String]) {
     //    println("41: " + elapsed(Euler41.solve()))
     //    println("42: " + elapsed(Euler42.solve()))
-    println("43: " + elapsed(Euler43.solve()))
-    //    println("44: " + elapsed(Euler44.solve()))
+    //    println("43: " + elapsed(Euler43.solve()))
+    println("44: " + elapsed(Euler44.solve()))
     //    println("45: " + elapsed(Euler45.solve()))
     //    println("46: " + elapsed(Euler46.solve()))
     //    println("47: " + elapsed(Euler47.solve()))
     //    println("48: " + elapsed(Euler48.solve()))
     //    println("49: " + elapsed(Euler49.solve()))
     //    println("50: " + elapsed(Euler50.solve()))
+  }
+}
+
+object Euler44 {
+  val limit = 10000
+  val pentagonals = Array(1 to limit: _*) map { n => n * (3 * n - 1) / 2 }
+  def isPentagonal(n: Int) = {
+    java.util.Arrays.binarySearch(pentagonals, n) >= 0
+    //        math.sqrt(24 * n + 1) % 6 == 5
+  }
+  def solve() = {
+    for {
+      n <- (0 until limit).par
+      m <- (n + 1 until limit)
+      if (isPentagonal(pentagonals(m) + pentagonals(n)))
+      if (isPentagonal(pentagonals(m) - pentagonals(n)))
+    } yield pentagonals(m) - pentagonals(n)
   }
 }
 

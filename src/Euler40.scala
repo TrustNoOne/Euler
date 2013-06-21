@@ -74,7 +74,7 @@ object Euler37 {
       val lr = toDigits(n).scanLeft((1, 0))((s, x) => (s._1 * 10, s._2 + s._1 * x)).map(_._2).drop(1)
       val rl = toDigits(n).reverse.scanLeft(0)((s, x) => s * 10 + x).drop(1)
       (lr forall isPrime) && (rl forall isPrime)
-    } take (11) sum
+    }.take(11).sum
   }
 }
 
@@ -83,9 +83,9 @@ object Euler36 {
     (xs zip xs.reverse) take (xs.size / 2) forall (x => x._1 == x._2)
 
   def solve() = {
-    1 to 1000000 filter { n =>
+    (1 to 1000000).filter { n =>
       isPalindrome(toDigits(n)) && isPalindrome(toBinaryDigits(n))
-    } sum
+    }.sum
   }
 }
 
@@ -105,10 +105,10 @@ object Euler35 {
 object Euler34 {
   def solve() = {
     val factorials = 0 to 9 map (n => fact(n).toInt)
-    (1 to factorials.sum) filter { n =>
+    (1 to factorials.sum).filter { n =>
       val digits = toDigits(n)
       digits.size > 1 && n == digits.map(factorials).sum
-    } sum
+    }.sum
   }
 }
 

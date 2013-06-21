@@ -90,7 +90,7 @@ object Euler5 {
 }
 
 object Euler4 {
-  def isPalindrome(n: Int) = (n toString (), n toString () reverse).zipped forall (_ == _)
+  def isPalindrome(n: Int) = (n.toString, n.toString.reverse).zipped forall (_ == _)
 
   def solve = {
     var max = (0, 0, 0)
