@@ -41,6 +41,17 @@ object Euler {
   def isPerfectSquare(n: Int) = math.sqrt(n) % 1 == 0
   def isTriangular(n: Int) = isPerfectSquare(8 * n + 1)
   def isTriangular(n: Long) = isPerfectSquare(8 * n + 1)
+  def isPentagonal(n: Int) = math.sqrt(24 * n + 1) % 6 == 5
+  def isPentagonal(n: Long) = math.sqrt(24 * n + 1) % 6 == 5
+
+  object LongIterator {
+    def from(start: Long, step: Long): Iterator[Long] = new Iterator[Long] {
+      private var i = start
+      def hasNext: Boolean = true
+      def next(): Long = { val result = i; i += step; result }
+    }
+    def from(start: Long): Iterator[Long] = from(start, 1)
+  }
 
   implicit class ExtInt(n: Int) {
     def isPrime = Euler.isPrime(n)
