@@ -10,9 +10,24 @@ object Euler41to50 {
     //    println("45: " + elapsed(Euler45.solve()))
     //    println("46: " + elapsed(Euler46.solve()))
     //    println("47: " + elapsed(Euler47.solve()))
-    println("48: " + elapsed(Euler48.solve()))
-    //    println("49: " + elapsed(Euler49.solve()))
+    //    println("48: " + elapsed(Euler48.solve()))
+    println("49: " + elapsed(Euler49.solve()))
     //    println("50: " + elapsed(Euler50.solve()))
+  }
+}
+
+object Euler49 {
+  val fourDigitPrimes = Range(1001, 9999, 2).filter(isPrime)
+  def solve() = {
+    val primesWithAtLeastThreePrimePermutations =
+      fourDigitPrimes.groupBy(toDigits(_).sorted).values.filter(_.size >= 3)
+    /* find all the "distances" between the primes in the set, and filter only
+     * the sets that have three primes with the same distance (difference)
+     */
+    primesWithAtLeastThreePrimePermutations.flatMap { xs => // unreadable?
+      xs.combinations(2).toList.groupBy(x => x(1) - x(0)) //group by difference
+        .values.map(_.flatten.toSet).filter(_.size == 3).map(_.mkString)
+    }
   }
 }
 
