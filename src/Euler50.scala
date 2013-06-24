@@ -7,11 +7,30 @@ object Euler41to50 {
     //    println("43: " + elapsed(Euler43.solve()))
     //    println("44: " + elapsed(Euler44.solve()))
     //    println("45: " + elapsed(Euler45.solve()))
-    println("46: " + elapsed(Euler46.solve()))
-    //    println("47: " + elapsed(Euler47.solve()))
+    //    println("46: " + elapsed(Euler46.solve()))
+    println("47: " + elapsed(Euler47.solve()))
     //    println("48: " + elapsed(Euler48.solve()))
     //    println("49: " + elapsed(Euler49.solve()))
     //    println("50: " + elapsed(Euler50.solve()))
+  }
+}
+
+object Euler47 {
+  val primes = 2 #:: Stream.from(3, 2).filter(isPrime)
+  def factorCount(n: Int) = primes.takeWhile(_ <= n / 2).count(n % _ == 0)
+  def factorCount2(n: Int) = { // 10 times faster
+    def loop(n: Int, cnt: Int, primes: Stream[Int]): Int = n match {
+      case x if primes.head > x => cnt
+      case x if x % primes.head == 0 => loop(x / primes.head, cnt + 1, primes.tail)
+      case _ => loop(n, cnt, primes.tail)
+    }
+    loop(n, 0, primes)
+  }
+  def solve() = {
+    val res = Iterator.from(2 * 3 * 5 * 7).dropWhile { n =>
+      (n to n + 3).exists(factorCount2(_) != 4)
+    }
+    res.next
   }
 }
 
