@@ -6,13 +6,23 @@ object Euler41to50 {
     //    println("42: " + elapsed(Euler42.solve()))
     //    println("43: " + elapsed(Euler43.solve()))
     //    println("44: " + elapsed(Euler44.solve()))
-    println("45: " + elapsed(Euler45.solve()))
-    //    println("46: " + elapsed(Euler46.solve()))
+    //    println("45: " + elapsed(Euler45.solve()))
+    println("46: " + elapsed(Euler46.solve()))
     //    println("47: " + elapsed(Euler47.solve()))
     //    println("48: " + elapsed(Euler48.solve()))
     //    println("49: " + elapsed(Euler49.solve()))
     //    println("50: " + elapsed(Euler50.solve()))
   }
+}
+
+object Euler46 {
+  val primes = Stream.from(3, 2).filter(isPrime) // 2 is not needed
+  val oddComposites = Stream.from(9, 2).filterNot(isPrime)
+  def isGoldbach(n: Int) = {
+    primes.takeWhile(n - _ >= 2).map(p => (n - p) / 2)
+      .filter(isPerfectSquare).size > 0
+  }
+  def solve() = oddComposites.dropWhile(isGoldbach).head
 }
 
 object Euler45 {

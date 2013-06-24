@@ -35,10 +35,21 @@ object Euler {
   def isPrime(n: Int) = {
     if (n < 2) false
     else 2 to math.sqrt(n).toInt forall (n % _ > 0)
-  }
+  } 
 
-  def isPerfectSquare(n: Long) = math.sqrt(n) % 1 == 0
-  def isPerfectSquare(n: Int) = math.sqrt(n) % 1 == 0
+  def isPerfectSquare(n: Long) = {
+    // http://stackoverflow.com/questions/295579/fastest-way-to-determine-if-an-integers-square-root-is-an-integer
+    if (n <= 0) false else n & 0x3F match {
+      case 0x00 | 0x01 | 0x04 | 0x09 | 0x10 | 0x11
+        | 0x19 | 0x21 | 0x24 | 0x29 | 0x31 | 0x39 =>
+        math.sqrt(n) % 1 == 0
+      case _ => false
+    }
+  }
+  def isPerfectSquare(n: Int): Boolean = isPerfectSquare(n.toLong)
+
+  //  def isPerfectSquare(n: Long) = math.sqrt(n) % 1 == 0
+  //  def isPerfectSquare(n: Int) = math.sqrt(n) % 1 == 0
   def isTriangular(n: Int) = isPerfectSquare(8 * n + 1)
   def isTriangular(n: Long) = isPerfectSquare(8 * n + 1)
   def isPentagonal(n: Int) = math.sqrt(24 * n + 1) % 6 == 5
