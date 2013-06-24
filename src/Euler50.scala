@@ -1,4 +1,5 @@
 import Euler._
+import scala.math.BigInt
 
 object Euler41to50 {
   def main(args: Array[String]) {
@@ -8,11 +9,15 @@ object Euler41to50 {
     //    println("44: " + elapsed(Euler44.solve()))
     //    println("45: " + elapsed(Euler45.solve()))
     //    println("46: " + elapsed(Euler46.solve()))
-    println("47: " + elapsed(Euler47.solve()))
-    //    println("48: " + elapsed(Euler48.solve()))
+    //    println("47: " + elapsed(Euler47.solve()))
+    println("48: " + elapsed(Euler48.solve()))
     //    println("49: " + elapsed(Euler49.solve()))
     //    println("50: " + elapsed(Euler50.solve()))
   }
+}
+
+object Euler48 {
+  def solve() = (1 to 1000).map(n => BigInt(n).pow(n)).sum % 10000000000L
 }
 
 object Euler47 {
