@@ -3,16 +3,27 @@ import scala.math.BigInt
 
 object Euler41to50 {
   def main(args: Array[String]) {
-    //    println("41: " + elapsed(Euler41.solve()))
-    //    println("42: " + elapsed(Euler42.solve()))
-    //    println("43: " + elapsed(Euler43.solve()))
-    //    println("44: " + elapsed(Euler44.solve()))
-    //    println("45: " + elapsed(Euler45.solve()))
-    //    println("46: " + elapsed(Euler46.solve()))
-    //    println("47: " + elapsed(Euler47.solve()))
-    //    println("48: " + elapsed(Euler48.solve()))
+    println("41: " + elapsed(Euler41.solve()))
+    println("42: " + elapsed(Euler42.solve()))
+    println("43: " + elapsed(Euler43.solve()))
+    println("44: " + elapsed(Euler44.solve()))
+    println("45: " + elapsed(Euler45.solve()))
+    println("46: " + elapsed(Euler46.solve()))
+    println("47: " + elapsed(Euler47.solve()))
+    println("48: " + elapsed(Euler48.solve()))
     println("49: " + elapsed(Euler49.solve()))
-    //    println("50: " + elapsed(Euler50.solve()))
+    println("50: " + elapsed(Euler50.solve()))
+  }
+}
+
+object Euler50 {
+  val primes = 2 +: Range(3, 5000, 2).filter(isPrime)
+  def solve() = {
+    val primeSumSeqs = (2 to primes.size).view.flatMap(primes.sliding(_)).filter { xs =>
+      val sum = xs.sum;
+      sum.isPrime && sum < 1000000
+    }
+    primeSumSeqs.maxBy(_.size).sum
   }
 }
 
