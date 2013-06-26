@@ -10,6 +10,10 @@ object Euler {
     f(n)
   }
 
+  def combinations(n: Int, k: Int) = {
+    (BigInt(n - k + 1) to BigInt(n)).product / (BigInt(2) to BigInt(k)).product
+  }
+
   def combine[A](xs: Traversable[Traversable[A]]): Seq[Seq[A]] =
     xs.foldLeft(Seq(Seq.empty[A]))((x, y) => for (a <- x.view; b <- y) yield a :+ b)
 
@@ -35,7 +39,7 @@ object Euler {
   def isPrime(n: Int) = {
     if (n < 2) false
     else 2 to math.sqrt(n).toInt forall (n % _ > 0)
-  } 
+  }
 
   def isPerfectSquare(n: Long) = {
     // http://stackoverflow.com/questions/295579/fastest-way-to-determine-if-an-integers-square-root-is-an-integer
