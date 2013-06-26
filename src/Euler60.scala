@@ -3,8 +3,8 @@ import scala.math.BigInt
 
 object Euler51to60 {
   def main(args: Array[String]) {
-    println("51: " + elapsed(Euler51.solve()))
-    //    println("52: " + elapsed(Euler52.solve()))
+    //    println("51: " + elapsed(Euler51.solve()))
+    println("52: " + elapsed(Euler52.solve()))
     //    println("53: " + elapsed(Euler53.solve()))
     //    println("54: " + elapsed(Euler54.solve()))
     //    println("55: " + elapsed(Euler55.solve()))
@@ -13,6 +13,16 @@ object Euler51to60 {
     //    println("58: " + elapsed(Euler58.solve()))
     //    println("59: " + elapsed(Euler59.solve()))
     //    println("60: " + elapsed(Euler60.solve()))
+  }
+}
+
+object Euler52 {
+  def solve() = {
+    val res = Iterator.from(1) dropWhile { x =>
+      val sortedDigits = toDigits(x).sorted
+      (2 to 6).exists { n => sortedDigits != toDigits(n * x).sorted }
+    }
+    res.next()
   }
 }
 
