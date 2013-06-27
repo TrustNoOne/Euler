@@ -116,8 +116,7 @@ object Euler43 {
 
 object Euler42 {
   def wordvalue(w: String) = w.foldLeft(0)(_ + _.toInt - 64)
-  def solve() = {
-    val file = io.Source.fromFile("words.txt")
+  def solve() = withResource("words.txt") { file =>
     val words = file.mkString.replaceAll("\"", "").split(",")
     file.close
     words.map(wordvalue).filter(isTriangular).length

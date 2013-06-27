@@ -39,9 +39,7 @@ object Euler19 {
 }
 
 object Euler18 { //Ok for Euler67 too 
-  def solve = {
-    import scala.io.Source
-    val src = Source.fromFile("./triangle17.txt")
+  def solve = withResource("triangle17.txt") { src =>
     val tree = src.getLines.map { _.split(" ").map(_.toInt) }.toIndexedSeq
     src.close
 

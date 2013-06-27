@@ -122,8 +122,7 @@ object Euler23 {
 
 object Euler22 {
   def alphabeticalValue(s: String) = s.foldLeft(0)(_ + _.toInt - 64)
-  def solve = {
-    val file = io.Source.fromFile("names.txt")
+  def solve = withResource("names.txt") { file =>
     val list = file.mkString.replaceAll("\"", "").split(",")
     file.close
     list.sorted.zipWithIndex.foldLeft(0) {

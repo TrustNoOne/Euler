@@ -1,4 +1,16 @@
 object Euler {
+  def resource(fileName: String) =
+    io.Source.fromURL(getClass.getResource("./" + fileName))
+
+  def withResource(fileName: String)(block: io.Source => Any) = {
+    val source = resource(fileName)
+    try {
+      block(source)
+    } finally {
+      source.close()
+    }
+  }
+
   def elapsed(t: => Any) = {
     val t0 = System.currentTimeMillis()
     t.toString + " in " + (System.currentTimeMillis() - t0) + " ms"
