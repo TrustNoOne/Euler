@@ -1,4 +1,10 @@
+package euler
+
 import Euler._
+import scala.Array.canBuildFrom
+import scala.collection.immutable.Stream.consWrapper
+import scala.collection.mutable.ListBuffer
+import scala.math.BigInt.int2bigInt
 
 object Euler21to30 {
   def main(args: Array[String]) {

@@ -1,4 +1,7 @@
+package euler
+
 import Euler._
+import scala.math.sqrt
 
 object Euler1to10 {
   def main(args: Array[String]) {

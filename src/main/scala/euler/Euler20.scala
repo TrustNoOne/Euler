@@ -1,4 +1,14 @@
+package euler
+
 import Euler._
+import java.util.Calendar.DAY_OF_MONTH
+import java.util.Calendar.DAY_OF_WEEK
+import java.util.Calendar.DAY_OF_YEAR
+import java.util.Calendar.JANUARY
+import java.util.GregorianCalendar
+import scala.Array.canBuildFrom
+import scala.math.BigInt.int2bigInt
+import scala.math.BigInt.long2bigInt
 
 object Euler11to20 {
   def main(args: Array[String]) {

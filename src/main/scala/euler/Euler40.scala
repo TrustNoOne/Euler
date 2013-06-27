@@ -1,4 +1,7 @@
+package euler
+
 import Euler._
+import scala.collection.immutable.Stream.consWrapper
 
 object Euler31to40 {
   def main(args: Array[String]) {

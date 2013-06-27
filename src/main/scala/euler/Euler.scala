@@ -1,3 +1,8 @@
+package euler
+
+
+import scala.math.BigInt.int2bigInt
+
 object Euler {
   def resource(fileName: String) =
     io.Source.fromURL(getClass.getResource("./" + fileName))

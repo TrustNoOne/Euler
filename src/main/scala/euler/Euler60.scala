@@ -1,5 +1,7 @@
+package euler
+
 import Euler._
-import scala.math.BigInt
+import scala.math.BigInt.int2bigInt
 
 object Euler51to60 {
   def main(args: Array[String]) {
