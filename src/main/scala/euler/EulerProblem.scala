@@ -1,26 +1,9 @@
 package euler
 
+trait EulerProblem {
+  def result: Any
 
-import scala.math.BigInt.int2bigInt
-
-object Euler {
-  def resource(fileName: String) =
-    io.Source.fromURL(getClass.getResource("./" + fileName))
-
-  def withResource(fileName: String)(block: io.Source => Any) = {
-    val source = resource(fileName)
-    try {
-      block(source)
-    } finally {
-      source.close()
-    }
-  }
-
-  def elapsed(t: => Any) = {
-    val t0 = System.currentTimeMillis()
-    t.toString + " in " + (System.currentTimeMillis() - t0) + " ms"
-  }
-
+  //Implicit conversion and common methods
   def fact(n: Int): BigInt = {
     def f(n: Int, acc: BigInt = 1): BigInt =
       if (n <= 1) acc else f(n - 1, acc * n)
@@ -31,15 +14,8 @@ object Euler {
     (BigInt(n - k + 1) to BigInt(n)).product / (BigInt(2) to BigInt(k)).product
   }
 
-  def combine[A](xs: Traversable[Traversable[A]]): Seq[Seq[A]] =
-    xs.foldLeft(Seq(Seq.empty[A]))((x, y) => for (a <- x.view; b <- y) yield a :+ b)
-
   def toDigits(n: Int): Seq[Int] =
     if (n < 10) Seq(n) else (n % 10) +: toDigits(n / 10)
-
-  def toBinaryDigits(n: Int): Seq[Int] =
-    if (n < 2) Seq(n) else (n % 2) +: toDigits(n / 2)
-
   def toDigits(n: Long): Seq[Long] =
     if (n < 10) Seq(n) else (n % 10) +: toDigits(n / 10)
 
@@ -86,19 +62,20 @@ object Euler {
   }
 
   implicit class ExtInt(n: Int) {
-    def isPrime = Euler.isPrime(n)
-    def toDigits = Euler.toDigits(n)
-    def toBinaryDigits = Euler.toBinaryDigits(n)
-    def fact = Euler.fact(n)
-    def isPerfectSquare = Euler.isPerfectSquare(n)
-    def isTriangular = Euler.isTriangular(n)
+    def isPrime = EulerProblem.this.isPrime(n)
+    def toDigits = EulerProblem.this.toDigits(n)
+    def fact = EulerProblem.this.fact(n)
+    def isPerfectSquare = EulerProblem.this.isPerfectSquare(n)
+    def isTriangular = EulerProblem.this.isTriangular(n)
+    def isPentagonal = EulerProblem.this.isPentagonal(n)
   }
 
   implicit class ExtLong(n: Long) {
-    def isPrime = Euler.isPrime(n)
-    def toDigits = Euler.toDigits(n)
-    def isPerfectSquare = Euler.isPerfectSquare(n)
-    def isTriangular = Euler.isTriangular(n)
+    def isPrime = EulerProblem.this.isPrime(n)
+    def toDigits = EulerProblem.this.toDigits(n)
+    def isPerfectSquare = EulerProblem.this.isPerfectSquare(n)
+    def isTriangular = EulerProblem.this.isTriangular(n)
+    def isPentagonal = EulerProblem.this.isPentagonal(n)
   }
 
 }

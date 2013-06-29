@@ -18,13 +18,21 @@ object BuildSettings {
     scalaVersion := buildScalaVersion)
 }
 
+object Dependencies {
+  val scalaReflection = "org.scala-lang" % "scala-reflect" % BuildSettings.buildScalaVersion
+
+  val compileDeps = Seq(scalaReflection)
+}
+
 object EulerBuild extends Build {
   import BuildSettings._
 
   lazy val root = Project(
     "ProjectEuler",
     file("."),
-    settings = buildSettings ++ sbteclipseSettings)
+    settings = buildSettings ++
+      sbteclipseSettings ++
+      Seq(libraryDependencies ++= Dependencies.compileDeps))
 
 }
 
