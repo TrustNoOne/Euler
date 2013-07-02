@@ -45,8 +45,13 @@ package object euler {
   //  def isPerfectSquare(n: Int) = math.sqrt(n) % 1 == 0
   def isTriangular(n: Int) = isPerfectSquare(8 * n + 1)
   def isTriangular(n: Long) = isPerfectSquare(8 * n + 1)
+
   def isPentagonal(n: Int) = math.sqrt(24 * n + 1) % 6 == 5
   def isPentagonal(n: Long) = math.sqrt(24 * n + 1) % 6 == 5
+
+  def isPalindrome(n: Int): Boolean = isPalindrome(n.toString)
+  def isPalindrome(n: Long): Boolean = isPalindrome(n.toString)
+  def isPalindrome(s: String) = (s, s.reverse).zipped forall (_ == _)
 
   implicit class ExtInt(val n: Int) extends AnyVal {
     def isPrime = euler.isPrime(n)
@@ -55,6 +60,7 @@ package object euler {
     def isPerfectSquare = euler.isPerfectSquare(n)
     def isTriangular = euler.isTriangular(n)
     def isPentagonal = euler.isPentagonal(n)
+    def isPalindrome = euler.isPalindrome(n)
   }
 
   implicit class ExtLong(val n: Long) extends AnyVal {
@@ -63,6 +69,7 @@ package object euler {
     def isPerfectSquare = euler.isPerfectSquare(n)
     def isTriangular = euler.isTriangular(n)
     def isPentagonal = euler.isPentagonal(n)
+    def isPalindrome = euler.isPalindrome(n)
   }
 
   object LongIterator {
