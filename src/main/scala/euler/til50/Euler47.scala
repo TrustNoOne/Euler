@@ -2,8 +2,6 @@ package euler
 package til50
 
 object Euler47 extends EulerProblem {
-  val primes = 2 #:: Stream.from(3, 2).filter(isPrime)
-
   def factorCount(n: Int) = primes.takeWhile(_ <= n / 2).count(n % _ == 0)
 
   def factorCount2(n: Int) = { // 10 times faster

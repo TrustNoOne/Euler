@@ -30,6 +30,9 @@ package object euler {
     else 2 to math.sqrt(n).toInt forall (n % _ > 0)
   }
 
+  val primes = 2 #:: Stream.from(3, 2).filter(isPrime)
+  def primesIterator = Iterator(2) ++ Iterator.from(3, 2).filter(isPrime)
+
   def isPerfectSquare(n: Long) = {
     // http://stackoverflow.com/questions/295579/fastest-way-to-determine-if-an-integers-square-root-is-an-integer
     if (n <= 0) false else n & 0x3F match {
