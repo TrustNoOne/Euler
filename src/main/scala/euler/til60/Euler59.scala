@@ -4,14 +4,12 @@ package til60
 import Utils._
 
 object Euler59 extends EulerProblem {
-
+  
   val keys = for {
     x <- 'a' to 'z'
     y <- 'a' to 'z'
     z <- 'a' to 'z'
   } yield Seq(x, y, z)
-
-  implicit def strToIntSeq(s: String) = s.toCharArray.map(_.toInt)
 
   def decrypt(text: Seq[Char], key: Seq[Char]) = {
     text.grouped(key.size).flatMap(_.zip(key).map(x => (x._1 ^ x._2).toChar))
