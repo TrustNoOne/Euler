@@ -3,6 +3,7 @@ package euler
 import scala.reflect.internal.MissingRequirementError
 import scala.reflect.runtime.universe._
 import scala.reflect.runtime.{ universe => ru }
+import Utils._
 
 object ProjectEuler extends App {
   implicit val m = ru.runtimeMirror(getClass.getClassLoader)
@@ -31,10 +32,6 @@ object ProjectEuler extends App {
     }
   }
 
-  private def elapsed(block: => Any) = {
-    val t0 = System.currentTimeMillis
-    val result = block
-    (System.currentTimeMillis - t0, result)
-  }
+
 
 }

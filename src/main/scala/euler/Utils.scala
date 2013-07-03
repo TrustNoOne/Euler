@@ -13,4 +13,10 @@ object Utils {
     }
   }
 
+  def elapsed(block: => Any) = {
+    val t0 = System.currentTimeMillis
+    val result = block
+    (System.currentTimeMillis - t0, result)
+  }
+
 }
