@@ -5,7 +5,7 @@ import Utils._
 import euler._
 
 /**
- * This is too slow! we have to load a prime
+ * This is too slow! we have to load a prime table
  */
 object Euler60 extends EulerProblem {
 
