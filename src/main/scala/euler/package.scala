@@ -33,6 +33,18 @@ package object euler {
   val primes = 2 #:: Stream.from(3, 2).filter(isPrime)
   def primesIterator = Iterator(2) ++ Iterator.from(3, 2).filter(isPrime)
 
+  def primeFactors(n: Long): Seq[Int] = {
+    val primes = euler.primes.iterator
+    @annotation.tailrec
+    def loop(n: Long, factors: List[Int], p: Int): List[Int] = n match {
+      case 1 => factors
+      case n if n % p == 0 => loop(n / p, p :: factors, p)
+      case _ => loop(n, factors, primes.next)
+    }
+
+    loop(n, List[Int](), primes.next)
+  }
+
   def isPerfectSquare(n: Long) = {
     // http://stackoverflow.com/questions/295579/fastest-way-to-determine-if-an-integers-square-root-is-an-integer
     if (n <= 0) false else n & 0x3F match {
@@ -43,6 +55,12 @@ package object euler {
     }
   }
   def isPerfectSquare(n: Int): Boolean = isPerfectSquare(n.toLong)
+
+  def isPerfectCube(n: Long): Boolean = {
+    val x = math.cbrt(n)
+    x == Math.rint(x)
+  }
+  def isPerfectCube(n: Int): Boolean = isPerfectCube(n.toLong)
 
   //  def isPerfectSquare(n: Long) = math.sqrt(n) % 1 == 0
   //  def isPerfectSquare(n: Int) = math.sqrt(n) % 1 == 0
