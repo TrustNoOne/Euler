@@ -10,6 +10,8 @@ package object euler {
     (BigInt(n - k + 1) to BigInt(n)).product / (BigInt(2) to BigInt(k)).product
   }
 
+  def bigIntStream(from: BigInt, step: Int = 1): Stream[BigInt] = from #:: bigIntStream(from + step, step)
+
   def toDigits(n: Int): Seq[Int] =
     if (n < 10) Seq(n) else (n % 10) +: toDigits(n / 10)
   def toDigits(n: Long): Seq[Long] =
