@@ -48,9 +48,20 @@ package object euler {
   //  def isPerfectSquare(n: Int) = math.sqrt(n) % 1 == 0
   def isTriangular(n: Int) = isPerfectSquare(8 * n + 1)
   def isTriangular(n: Long) = isPerfectSquare(8 * n + 1)
-
   def isPentagonal(n: Int) = math.sqrt(24 * n + 1) % 6 == 5
   def isPentagonal(n: Long) = math.sqrt(24 * n + 1) % 6 == 5
+  def isHexagonal(n: Int) = {
+    val x = (math.sqrt(8 * n + 1) + 1) / 4
+    x == Math.rint(x)
+  }
+  def isHeptagonal(n: Int) = {
+    val x = (math.sqrt(40 * n + 9) + 3) / 10
+    x == Math.rint(x)
+  }
+  def isNgonal(s: Int, n: Int) = {
+    val x = (math.sqrt(n * (8 * s - 16) + math.pow(s - 4, 2)) + s - 4) / (2 * s - 4)
+    x == Math.rint(x)
+  }
 
   def isPalindrome(n: Int): Boolean = isPalindrome(n.toString)
   def isPalindrome(n: Long): Boolean = isPalindrome(n.toString)
