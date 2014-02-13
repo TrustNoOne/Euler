@@ -4,7 +4,9 @@ package til20
 import Utils._
 
 object Euler18 extends EulerProblem { //Ok for Euler67 too 
-  override def result = withResource("triangle17.txt") { src =>
+  override def result = solve("triangle18.txt")
+
+  def solve(triangleFile: String) = withResource(triangleFile) { src =>
     val tree = src.getLines.map { _.split(" ").map(_.toInt) }.toIndexedSeq
     src.close
 
