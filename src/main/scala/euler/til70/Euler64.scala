@@ -9,7 +9,7 @@ object Euler64 extends EulerProblem {
     (2 to 10000) filterNot isPerfectSquare map contFractLen count (_ % 2 == 1)
   }
 
-  // based on algorithm below
+  // based on http://en.wikipedia.org/wiki/Methods_of_computing_square_roots#Continued_fraction_expansion
   def contFractLen(n: Int) = {
     val a0 = math.sqrt(n).toInt
     val m1 = a0
@@ -28,25 +28,6 @@ object Euler64 extends EulerProblem {
     }
 
     loop(m1, d1, a1, 1)
-  }
-
-  //not used
-  class SqrContFractionIterator(n: Int) extends Iterator[Int] {
-    //http://en.wikipedia.org/wiki/Methods_of_computing_square_roots#Continued_fraction_expansion
-    val hasNext: Boolean = true
-    val a0 = math.sqrt(n).toInt
-
-    var m = 0
-    var d = 1
-    var a = a0
-
-    def next(): Int = {
-      val res = a
-      m = d * a - m
-      d = (n - m * m) / d
-      a = (a0 + m) / d
-      res
-    }
   }
 
 }
