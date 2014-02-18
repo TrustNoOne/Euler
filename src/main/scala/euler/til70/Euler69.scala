@@ -6,34 +6,12 @@ import euler.til20.Euler18
 object Euler69 extends EulerProblem {
 
   override def result = {
-    // a little slow
     val res = (2 to 1000000).view.par map { n => (n, n.toDouble / φ(n)) }
     res.maxBy(_._2)._1
   }
 
-  def totients(n: Int): Array[Int] = {
-    val totients = Array.fill(n)(1)
-    // finds the totient "contributor" to φ(n) for the divisor of n "p".
-    def φp(n: Int, p: Int): Int = {
-      @annotation.tailrec
-      def loop(n: Int, p: Int, acc: Int): Int = {
-        if (n % p == 0) loop(n / p, p, acc * p)
-        else acc
-      }
-
-      if (n % p != 0) 1 else loop(n / p, p, p - 1)
-    }
-
-    for {
-      i <- Range(2, n) if totients(i) == 1
-      j <- Range(i, n, i)
-    } { totients(j) *= φp(j, i) }
-
-    totients
-  }
-
   // good for n < 1000001
-  val φs = totients(1000001)
+  lazy val φs = euler.totient.Totient(1000001)
   def φ(n: Int): Int = φs(n)
 
   def φslow(n: Int): Int = {
