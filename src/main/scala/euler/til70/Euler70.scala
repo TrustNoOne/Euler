@@ -1,8 +1,6 @@
 package euler
 package til70
 
-import euler.til20.Euler18
-
 object Euler70 extends EulerProblem {
 
   override def result = {
