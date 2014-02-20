@@ -1,10 +1,14 @@
 package object euler {
   //Implicit conversion and common methods
   def fact(n: Int): BigInt = {
+    @annotation.tailrec
     def f(n: Int, acc: BigInt = 1): BigInt =
       if (n <= 1) acc else f(n - 1, acc * n)
     f(n)
   }
+
+  @annotation.tailrec
+  def gcd(a: Int, b: Int): Int = if (b == 0) a.abs else gcd(b, a % b)
 
   def combinations(n: Int, k: Int) = {
     (BigInt(n - k + 1) to BigInt(n)).product / (BigInt(2) to BigInt(k)).product
@@ -103,16 +107,16 @@ package object euler {
     def isPentagonal = euler.isPentagonal(n)
     def isPalindrome = euler.isPalindrome(n)
   }
-  
+
   def bigIntStream(from: BigInt, step: Int = 1): Stream[BigInt] = from #:: bigIntStream(from + step, step)
-  
+
   object BigIntIterator {
     def from(start: BigInt, step: Int): Iterator[BigInt] = new Iterator[BigInt] {
       private var i = start
       def hasNext: Boolean = true
       def next(): BigInt = { val result = i; i += step; result }
     }
-    
+
     def from(start: BigInt): Iterator[BigInt] = from(start, 1)
   }
 
