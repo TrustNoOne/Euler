@@ -7,7 +7,6 @@ object Euler81 extends EulerProblem {
 
   //the matrix is basically a DAG sorted topologically
   override def result = {
-    import scala.collection.mutable
     val matrix = readMatrix()
     val matrixSize = matrix.size
 
