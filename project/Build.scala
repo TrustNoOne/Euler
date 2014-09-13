@@ -6,16 +6,17 @@ import EclipseKeys._
 object BuildSettings {
   val buildOrganization = "trustno1"
   val buildVersion = "1.0.0"
-  val buildScalaVersion = "2.10.2"
+  val buildScalaVersion = "2.11.2"
 
   val sbteclipseSettings = Seq(
     withSource := true,
     createSrc := EclipseCreateSrc.Default + EclipseCreateSrc.Resource)
 
-  val buildSettings = Defaults.defaultSettings ++ Seq(
+  val buildSettings = Seq(
     organization := buildOrganization,
     version := buildVersion,
-    scalaVersion := buildScalaVersion)
+    scalaVersion := buildScalaVersion,
+    scalacOptions ++= Seq("-feature", "-deprecation"))
 }
 
 object Dependencies {
