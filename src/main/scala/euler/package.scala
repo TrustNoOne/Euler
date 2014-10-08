@@ -9,6 +9,11 @@ package object euler {
 
   @annotation.tailrec
   def gcd(a: Int, b: Int): Int = if (b == 0) a.abs else gcd(b, a % b)
+  @annotation.tailrec
+  def gcd(a: Long, b: Long): Long = if (b == 0) a.abs else gcd(b, a % b)
+
+  def lcm(a: Int, b: Int): Int = (a * b).abs / gcd(a, b)
+  def lcm(a: Long, b: Long): Long = (a * b).abs / gcd(a, b)
 
   def combinations(n: Int, k: Int) = {
     (BigInt(n - k + 1) to BigInt(n)).product / (BigInt(2) to BigInt(k)).product
@@ -43,10 +48,10 @@ package object euler {
     def loop(n: Long, factors: List[Int], p: Int): List[Int] = n match {
       case 1 => factors
       case n if n % p == 0 => loop(n / p, p :: factors, p)
-      case _ => loop(n, factors, primes.next)
+      case _ => loop(n, factors, primes.next())
     }
 
-    loop(n, List[Int](), primes.next)
+    loop(n, List[Int](), primes.next())
   }
 
   def isPerfectSquare(n: Long) = {
