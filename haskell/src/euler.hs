@@ -3,8 +3,9 @@ import System.IO (hFlush, stdout)
 import System.Environment
 
 import qualified Euler001
+import qualified Euler002
 
-problems = [Euler001.solution]
+problems = [Euler001.solution, Euler002.solution]
 
 
 main = do 
