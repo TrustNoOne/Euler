@@ -1,7 +1,5 @@
 module Euler001 (solution) where
 
-import Control.Concurrent
-
 solution :: IO Integer
-solution = do return $ sum [1..100000000]
-
+solution = do 
+	return $ sum [x | x <- [1..999], x `mod` 5 == 0 || x `mod` 3 == 0]
