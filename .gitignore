@@ -5,3 +5,6 @@ bin
 .classpath
 target
 .idea
+.cabal-sandbox
+dist
+cabal.sandbox.config
