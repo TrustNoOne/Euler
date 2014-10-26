@@ -5,8 +5,10 @@ import System.Environment
 import Euler001
 import Euler002
 import Euler003
+import Euler004
 
-problems = [io euler1, io euler2, io euler3]
+
+problems = [io euler1, io euler2, io euler3, io euler4]
 
 main = do 
 	args <- getArgs
