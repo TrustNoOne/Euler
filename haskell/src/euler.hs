@@ -2,11 +2,13 @@ import Data.Time.Clock.POSIX (getPOSIXTime, POSIXTime)
 import System.IO (hFlush, stdout)
 import System.Environment
 
-import qualified Euler001
-import qualified Euler002
+import Euler001
+import Euler002
 
-problems = [Euler001.solution, Euler002.solution]
+problems = [io euler1, io euler2]
 
+io :: a -> IO a
+io x = return x
 
 main = do 
 	args <- getArgs
