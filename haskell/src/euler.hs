@@ -4,11 +4,9 @@ import System.Environment
 
 import Euler001
 import Euler002
+import Euler003
 
-problems = [io euler1, io euler2]
-
-io :: a -> IO a
-io x = return x
+problems = [io euler1, io euler2, io euler3]
 
 main = do 
 	args <- getArgs
@@ -16,6 +14,8 @@ main = do
 	(time, result) <- eval $ problems !! n
 	putStrLn $ "Result: " ++ (show result) ++ ". Elapsed time: " ++ (show time)
 	
+io :: a -> IO a
+io x = return x
 
 readProblemNumberFromArgs :: IO Int
 readProblemNumberFromArgs = do
