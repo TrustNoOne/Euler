@@ -1,3 +1,5 @@
+{-# LANGUAGE ExistentialQuantification #-}
+
 import Data.Time.Clock.POSIX (getPOSIXTime, POSIXTime)
 import System.IO (hFlush, stdout)
 import System.Environment
@@ -8,17 +10,25 @@ import Euler003
 import Euler004
 
 
+problems :: [IO Showable]
 problems = [io euler1, io euler2, io euler3, io euler4]
 
+
+data Showable = forall a . Show a => Showable a 
+
+instance Show Showable where
+   show (Showable a) = show a
+
+io :: Show a => a -> IO Showable
+io = return . Showable
+
+main :: IO ()
 main = do 
 	args <- getArgs
 	n <- if (null args) then readProblemNumberFromStdin else readProblemNumberFromArgs
 	(time, result) <- eval $ problems !! n
 	putStrLn $ "Result: " ++ (show result) ++ ". Elapsed time: " ++ (show time)
 	
-io :: a -> IO a
-io x = return x
-
 readProblemNumberFromArgs :: IO Int
 readProblemNumberFromArgs = do
 	args <- getArgs
