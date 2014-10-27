@@ -8,10 +8,11 @@ import Euler001
 import Euler002
 import Euler003
 import Euler004
+import Euler005
 
 
 problems :: [IO Showable]
-problems = [io euler1, io euler2, io euler3, io euler4]
+problems = [io euler1, io euler2, io euler3, io euler4, io euler5]
 
 
 data Showable = forall a . Show a => Showable a 
@@ -20,7 +21,7 @@ instance Show Showable where
    show (Showable a) = show a
 
 io :: Show a => a -> IO Showable
-io = return . Showable
+io = ($!) (return . Showable)
 
 main :: IO ()
 main = do 
@@ -42,10 +43,9 @@ readProblemNumberFromStdin = do
 	line <- getLine
 	return $ (read line) - 1
 
-eval :: IO a -> IO (POSIXTime, a)
+eval ::  IO Showable -> IO (POSIXTime, Showable)
 eval ioa = do
 	t1 <- getPOSIXTime
 	result <- ioa
-	return $! result
 	t2 <- getPOSIXTime
 	return (t2 - t1, result)
