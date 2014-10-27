@@ -1,5 +1,5 @@
 Euler
 =====
 
-I'm learning Scala with Euler Project
+Larning Scala and Haskell with Project Euler
 
