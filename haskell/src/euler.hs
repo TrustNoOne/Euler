@@ -13,9 +13,10 @@ import Euler006
 import Euler007
 import Euler008
 import Euler009
+import Euler010
 
 problems :: [IO Showable]
-problems = [io euler1, io euler2, io euler3, io euler4, io euler5, io euler6, io euler7, io euler8, io euler9]
+problems = [io euler1, io euler2, io euler3, io euler4, io euler5, io euler6, io euler7, io euler8, io euler9, io euler10]
 
 
 data Showable = forall a . Show a => Showable a 
