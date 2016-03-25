@@ -5,6 +5,6 @@ trait EulerProblem {
 
   def main(args: Array[String]) {
     val (elapsedTime, res) = Utils.elapsed(result)
-    println(s"${getClass} completed in $elapsedTime ms. Result: $res")
+    println(s"$getClass completed in $elapsedTime ms. Result: $res")
   }
 }

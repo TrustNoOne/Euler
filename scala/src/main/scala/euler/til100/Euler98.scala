@@ -24,10 +24,13 @@ object Euler98 extends EulerProblem {
   override def result = {
     val anagrams = words.groupBy(_.sorted).values filter (_.size > 1) flatMap (_.combinations(2))
 
-    anagrams.flatMap { case w1 :: w2 :: _ =>
-      letterMappings(w1) filter (isSquare(w2, _)) flatMap { m =>
-        Seq(fromDigits(w1.map(m).reverse), fromDigits(w2.map(m).reverse))
-      }
+    anagrams.flatMap {
+      case w1 :: w2 :: _ =>
+        letterMappings(w1) filter (isSquare(w2, _)) flatMap { m =>
+          Seq(fromDigits(w1.map(m).reverse), fromDigits(w2.map(m).reverse))
+        }
+
+      case _ => throw new IllegalStateException()
     }.max
   }
 
