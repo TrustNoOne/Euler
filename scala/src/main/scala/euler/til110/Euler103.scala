@@ -121,29 +121,6 @@ object Euler103 extends EulerProblem {
   }
 
 
-  /**
-    * p1: S(B) ≠ S(C); that is, sums of subsets cannot be equal.
-    * p2: If B contains more elements than C then S(B) > S(C).
-    */
-  def isSpecialSumSet(xs: BitSet) = {
-    val checks = for {
-      b <- xs.subsets()
-      c <- (xs ^ b).subsets()
-      bSum = b.sum
-      cSum = c.sum
-
-      p1 = bSum == 0 || cSum == 0 || bSum != cSum
-      p2 = (b.size == c.size) || (b.size > c.size && bSum > cSum) || (cSum > bSum)
-    } yield {
-      val result = p1 && p2
-      if (!result) println(s"Check failed. B: $b, C: $c")
-      result
-    }
-
-    checks forall (_ == true)
-  }
-
-
   override def result = {
     // find next one using the middle element of the previous one as start element
     val resultSize = 7
