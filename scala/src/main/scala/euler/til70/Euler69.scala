@@ -1,10 +1,13 @@
 package euler
 package til70
+import scala.collection.parallel.CollectionConverters._
 
 object Euler69 extends EulerProblem {
 
   override def result = {
-    val res = (2 to 1000000).view.par map { n => (n, n.toDouble / φ(n)) }
+    val res = (2 to 1000000).view.par map { n =>
+      (n, n.toDouble / φ(n))
+    }
     res.maxBy(_._2)._1
   }
 
@@ -20,11 +23,10 @@ object Euler69 extends EulerProblem {
       case n if n % p == 0 =>
         val newAcc = if (first) acc * (p - 1) / p else acc
         loop(n / p, newAcc, p, false)
-      case _ => loop(n, acc, primes.next, true)
+      case _ => loop(n, acc, primes.next(), true)
     }
 
-    loop(n, n.toDouble, primes.next, true).toInt
+    loop(n, n.toDouble, primes.next(), true).toInt
   }
 
 }
-

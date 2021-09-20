@@ -4,7 +4,7 @@ package til60
 object Euler58 extends EulerProblem {
 
   override def result = {
-    /* 
+    /*
      * 1 iteration = 1 spiral cycle
      * center elem: 1
      * upper-right diag: 2*1+1 4*3+1 6*5+1... = i * (i - 1) + 1
@@ -19,7 +19,8 @@ object Euler58 extends EulerProblem {
     }
 
     //first is 0
-    val diagElemsCountResult = diagElems.drop(1).dropWhile(x => x._1.toDouble / x._2 >= 0.1).next._2
+    val diagElemsCountResult =
+      diagElems.drop(1).dropWhile(x => x._1.toDouble / x._2 >= 0.1).next()._2
     (diagElemsCountResult - 1) / 2 + 1 // side length
   }
 

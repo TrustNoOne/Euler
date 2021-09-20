@@ -12,8 +12,13 @@ object Euler49 extends EulerProblem {
      */
 
     primesWithAtLeastThreePrimePermutations.flatMap { xs => // unreadable?
-      xs.combinations(2).toList.groupBy(x => x(1) - x(0)) //group by difference
-        .values.map(_.flatten.toSet).filter(_.size == 3).map(_.mkString)
+      xs.combinations(2)
+        .toList
+        .groupBy(x => x(1) - x(0)) //group by difference
+        .values
+        .map(_.flatten.toSet)
+        .filter(_.size == 3)
+        .map(_.mkString)
     }
   }
 }

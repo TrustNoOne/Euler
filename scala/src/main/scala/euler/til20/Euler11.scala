@@ -1,8 +1,6 @@
 package euler
 package til20
 
-import scala.collection.TraversableOnce
-
 object Euler11 extends EulerProblem {
 
   val table = """08 02 22 97 38 15 00 40 00 75 04 05 07 78 52 12 50 77 91 08
@@ -24,25 +22,29 @@ object Euler11 extends EulerProblem {
                 |04 42 16 73 38 25 39 11 24 94 72 18 08 46 29 32 40 62 76 36
                 |20 69 36 41 72 30 23 88 34 62 99 69 82 67 59 85 74 04 36 16
                 |20 73 35 29 78 31 90 01 74 31 49 71 48 86 81 16 23 57 05 54
-                |01 70 54 71 83 51 54 69 16 92 33 48 61 43 52 01 89 19 67 48"""
-    .stripMargin.lines.toList map (_.split(" ").toList map (_.toInt))
+                |01 70 54 71 83 51 54 69 16 92 33 48 61 43 52 01 89 19 67 48""".stripMargin.linesIterator.toList map (_.split(
+    " ",
+  ).toList map (_.toInt))
 
   override def result = {
     List(maxRow _, maxCol _, maxDLtoUR _, maxULtoDR _).map(_(table)).max
   }
 
   def maxRow(xs: List[List[Int]]): Int = {
-    def max(xs: TraversableOnce[Int]) = if (xs.isEmpty) 0 else xs.max
-    xs.map {
-      ys => max(ys.sliding(4).map(_.product))
+    def max(xs: IterableOnce[Int]) =
+      if (xs.iterator.isEmpty) 0 else xs.iterator.max
+    xs.map { ys =>
+      max(ys.sliding(4).map(_.product))
     }.max
   }
 
   def maxCol(xs: List[List[Int]]): Int = maxRow(xs.transpose)
 
-  def maxDLtoUR(xs: List[List[Int]]): Int = maxCol(xs.zip(Stream.from(0)) map {
-    case (ys, nZeroes) => List.fill(nZeroes)(0) ++ ys ++ List.fill(ys.length - nZeroes)(0)
-  })
+  def maxDLtoUR(xs: List[List[Int]]): Int =
+    maxCol(xs.zip(LazyList.from(0)) map {
+      case (ys, nZeroes) =>
+        List.fill(nZeroes)(0) ++ ys ++ List.fill(ys.length - nZeroes)(0)
+    })
 
   def maxULtoDR(xs: List[List[Int]]): Int = maxDLtoUR(xs.reverse)
 

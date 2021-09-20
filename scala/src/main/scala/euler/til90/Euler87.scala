@@ -6,7 +6,9 @@ object Euler87 extends EulerProblem {
 
   override def result = {
     val max = 50000000
-    val (maxSquareRt, maxCubeRt, maxFouthRt) = (pow(max, 1.0 / 2), pow(max, 1.0 / 3), pow(max, 1.0 / 4))
+    val maxSquareRt = pow(max.toDouble, 1.0 / 2)
+    val maxCubeRt = pow(max.toDouble, 1.0 / 3)
+    val maxFouthRt = pow(max.toDouble, 1.0 / 4)
     val found = Array.ofDim[Int](max + 1)
     val primes = euler.primes.takeWhile(_ < maxSquareRt).toVector
 
@@ -21,5 +23,3 @@ object Euler87 extends EulerProblem {
   }
 
 }
-
-

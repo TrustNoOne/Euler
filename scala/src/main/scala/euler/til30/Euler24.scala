@@ -6,8 +6,8 @@ object Euler24 extends EulerProblem {
     import scala.collection.mutable.ListBuffer
     val idx = _idx - 1 /*1-based*/
     var remain: Int = idx
-    var elems = ListBuffer.range(0, numElems)
-    (0 until numElems) map { i =>
+    val elems = ListBuffer.range(0, numElems)
+    (0 until numElems) map { _ =>
       if (remain == 0) elems.remove(0)
       else {
         val currFact = fact(elems.size - 1).toInt

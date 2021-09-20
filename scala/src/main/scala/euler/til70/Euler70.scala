@@ -7,7 +7,7 @@ object Euler70 extends EulerProblem {
     val res = (2 until 10000000).view map { n =>
       (n, φ(n))
     } filter {
-      case (n, φn) => isPermutation(n, φn)
+      case (n, φn)         => isPermutation(n, φn)
     } minBy { case (n, φn) => n.toDouble / φn }
 
     res._1
@@ -22,4 +22,3 @@ object Euler70 extends EulerProblem {
   }
 
 }
-

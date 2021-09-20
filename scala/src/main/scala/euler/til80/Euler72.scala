@@ -12,4 +12,3 @@ object Euler72 extends EulerProblem {
   def φ(n: Int): Int = φs(n)
 
 }
-

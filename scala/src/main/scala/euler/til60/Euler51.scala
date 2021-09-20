@@ -2,9 +2,10 @@ package euler
 package til60
 
 object Euler51 extends EulerProblem {
+
   /**
-   * primePermutations(123, 2) returns all prime permutations of 123xx with xx == 00,11,..,99
-   */
+    * primePermutations(123, 2) returns all prime permutations of 123xx with xx == 00,11,..,99
+    */
   def primePermutations(n: Int, addedDigitCnt: Int) = {
     val digits = toDigits(n) ++ List.fill(addedDigitCnt)(-1)
     digits.permutations.map { x =>
@@ -15,8 +16,8 @@ object Euler51 extends EulerProblem {
   }
 
   override def result = {
-    val res = Stream.from(100) flatMap { primePermutations(_, 3) } dropWhile (xs => xs.size < 8 || xs.head < 100000)
+    val res = LazyList.from(100) flatMap { primePermutations(_, 3) } dropWhile (
+        xs => xs.size < 8 || xs.head < 100000)
     res.head.head
   }
 }
-

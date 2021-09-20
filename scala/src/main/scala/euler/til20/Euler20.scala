@@ -7,4 +7,3 @@ object Euler20 extends EulerProblem {
 
   override def result = Euler16.sumDigits(fact(100))
 }
-

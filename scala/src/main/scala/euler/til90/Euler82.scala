@@ -2,11 +2,12 @@ package euler
 package til90
 
 import Utils._
+import scala.collection.parallel.CollectionConverters._
 
 object Euler82 extends EulerProblem {
 
   val matrix = withResource("matrix.txt") { src =>
-    src.getLines.map(_.split(',').map(_.toInt)).toVector
+    src.getLines().map(_.split(',').map(_.toInt)).toVector
   }
   val matrixSize = matrix.size
 
@@ -23,7 +24,10 @@ object Euler82 extends EulerProblem {
     def visit(elem: (Int, Int)): Unit = elem match {
       case (i, j) =>
         //find indexes of destinations
-        val dests = Seq((i + 1, j), (i, j + 1), (i - 1, j)) filter { case (i, j) => i < matrixSize && j < matrixSize && i >= 0 }
+        val dests = Seq((i + 1, j), (i, j + 1), (i - 1, j)) filter {
+          case (i, j) =>
+            i < matrixSize && j < matrixSize && i >= 0
+        }
 
         if (!dests.isEmpty) {
           //update costs for destinations
@@ -55,5 +59,3 @@ object Euler82 extends EulerProblem {
   }
 
 }
-
-

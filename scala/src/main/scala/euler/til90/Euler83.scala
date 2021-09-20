@@ -6,7 +6,7 @@ import Utils._
 object Euler83 extends EulerProblem {
 
   val matrix = withResource("matrix.txt") { src =>
-    src.getLines.map(_.split(',').map(_.toInt)).toVector
+    src.getLines().map(_.split(',').map(_.toInt)).toVector
   }
   val matrixSize = matrix.size
 
@@ -20,7 +20,8 @@ object Euler83 extends EulerProblem {
       case (i, j) =>
         //find indexes of destinations
         val dests = Seq((i + 1, j), (i - 1, j), (i, j + 1), (i, j - 1)) filter {
-          case (i, j) => i < matrixSize && j < matrixSize && i >= 0 && j >= 0
+          case (i, j) =>
+            i < matrixSize && j < matrixSize && i >= 0 && j >= 0
         }
 
         //update costs for destinations
@@ -51,5 +52,3 @@ object Euler83 extends EulerProblem {
   }
 
 }
-
-

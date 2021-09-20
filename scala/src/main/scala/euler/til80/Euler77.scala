@@ -1,8 +1,6 @@
 package euler
 package til80
 
-import scala.annotation.tailrec
-
 object Euler77 extends EulerProblem {
 
   override def result = {
@@ -35,5 +33,3 @@ object Euler77 extends EulerProblem {
   }
 
 }
-
-

@@ -12,7 +12,7 @@ object Euler91 extends EulerProblem {
       y2 <- 0 to max if x1 != x2 || y2 > y1
     } yield (x1, y1, x2, y2)
 
-    xs.count { case (x1, y1, x2, y2) => isRight(x1, y1, x2, y2)}
+    xs.count { case (x1, y1, x2, y2) => isRight(x1, y1, x2, y2) }
   }
 
   def isRight(x1: Int, y1: Int, x2: Int, y2: Int) = {
@@ -27,5 +27,3 @@ object Euler91 extends EulerProblem {
   }
 
 }
-
-

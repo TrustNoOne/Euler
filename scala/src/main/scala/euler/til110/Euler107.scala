@@ -5,7 +5,6 @@ import euler.Utils.withResource
 
 import scala.collection.mutable
 
-
 /**
   * Minimum spanning tree
   */
@@ -44,41 +43,48 @@ object Euler107 extends EulerProblem {
     val Q = mutable.TreeSet(graph: _*)
     val graphCost = graph.flatMap(_.conns).map(_.weight).sum / 2
 
-    def minSpanningTreeCost(result: Int = 0): Int = if (Q.isEmpty) result
-    else {
-      val v = Q.head
-      Q.remove(v)
-      Qmap.remove(v.idx)
+    def minSpanningTreeCost(result: Int = 0): Int =
+      if (Q.isEmpty) result
+      else {
+        val v = Q.head
+        Q.remove(v)
+        Qmap.remove(v.idx)
 
-      v.conns foreach { case edge@Edge(_, to, cost) =>
-        //println(edge)
-        Qmap.get(to).filter(cost < _.C) foreach { w =>
-          Q -= w
-          val newW = w.copy(C = cost, E = Some(edge))
-          Q += newW
-          Qmap += w.idx -> newW
+        v.conns foreach {
+          case edge @ Edge(_, to, cost) =>
+            //println(edge)
+            Qmap.get(to).filter(cost < _.C) foreach { w =>
+              Q -= w
+              val newW = w.copy(C = cost, E = Some(edge))
+              Q += newW
+              Qmap += w.idx -> newW
+            }
+        }
+
+        v.E match {
+          case None       => minSpanningTreeCost(result)
+          case Some(edge) => minSpanningTreeCost(edge.weight + result)
         }
       }
-
-      v.E match {
-        case None => minSpanningTreeCost(result)
-        case Some(edge) => minSpanningTreeCost(edge.weight + result)
-      }
-    }
 
     val saving = graphCost - minSpanningTreeCost()
 
     saving
   }
 
-
   def parseGraph() = withResource("p107_network.txt") { src =>
-    src.getLines().map(_ split ",").zipWithIndex.map { case (line, idx) =>
-      val conns = line.zipWithIndex
-        .filter { case (weight, _) => weight != "-" }
-        .map { case (weight, to) => Edge(idx, to, weight.toInt) }
+    src
+      .getLines()
+      .map(_ split ",")
+      .zipWithIndex
+      .map {
+        case (line, idx) =>
+          val conns = line.zipWithIndex
+            .filter { case (weight, _) => weight != "-" }
+            .map { case (weight, to) => Edge(idx, to, weight.toInt) }
 
-      Vertex(idx, C = Int.MaxValue, E = None, conns.toList)
-    }.toList
+          Vertex(idx, C = Int.MaxValue, E = None, conns.toList)
+      }
+      .toList
   }
 }

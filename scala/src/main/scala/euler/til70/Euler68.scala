@@ -15,11 +15,15 @@ object Euler68 extends EulerProblem {
      *        i0   i6
      *    i4     i1
      *  i9  i3  i2 i7
-     *       i8      
+     *       i8
      */
     val res = rings map { // lines
       case i0 :: i1 :: i2 :: i3 :: i4 :: i5 :: i6 :: i7 :: i8 :: i9 :: Nil =>
-        List(List(i5, i0, i1), List(i6, i1, i2), List(i7, i2, i3), List(i8, i3, i4), List(i9, i4, i0))
+        List(List(i5, i0, i1),
+             List(i6, i1, i2),
+             List(i7, i2, i3),
+             List(i8, i3, i4),
+             List(i9, i4, i0))
       case _ => Nil
     } filter { // must have same size
       case l1 :: l2 :: l3 :: l4 :: l5 :: Nil =>
@@ -41,4 +45,3 @@ object Euler68 extends EulerProblem {
     }.toList
   }
 }
-

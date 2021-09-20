@@ -2,8 +2,8 @@ package euler
 package til30
 
 object Euler26 extends EulerProblem {
-  def decimals(n: Int, d: Int): Stream[(Int, Int)] = {
-    if (n == 0) Stream.empty
+  def decimals(n: Int, d: Int): LazyList[(Int, Int)] = {
+    if (n == 0) LazyList.empty
     else ((n % d * 10 / d), n % d) #:: decimals(n % d * 10, d)
   }
 
@@ -18,6 +18,7 @@ object Euler26 extends EulerProblem {
     repeating.map(_._1).toList.takeRight(remainIdx + 1)
   }
 
-  override def result = (2 until 1000).map(repeatingDecimals(1, _).size).zipWithIndex.max._2 + 2
+  override def result =
+    (2 until 1000).map(repeatingDecimals(1, _).size).zipWithIndex.max._2 + 2
 
 }

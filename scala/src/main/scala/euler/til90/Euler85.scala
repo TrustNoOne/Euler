@@ -23,5 +23,3 @@ object Euler85 extends EulerProblem {
   def containedRects(w: Int, h: Int) = (w * (w + 1) / 2) * (h * (h + 1) / 2)
 
 }
-
-

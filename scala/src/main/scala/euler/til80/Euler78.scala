@@ -1,13 +1,11 @@
 package euler
 package til80
 
-import scala.annotation.tailrec
-
 object Euler78 extends EulerProblem {
 
   override def result = {
     val p = Array.ofDim[BigInt](100000)
-    val genPentagonals = Euler76.genPentagonalIterator.toStream
+    val genPentagonals = Euler76.genPentagonalIterator.to(LazyList)
 
     p(0) = 1
 
@@ -32,5 +30,3 @@ object Euler78 extends EulerProblem {
   }
 
 }
-
-

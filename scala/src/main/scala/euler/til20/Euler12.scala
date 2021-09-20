@@ -9,7 +9,7 @@ object Euler12 extends EulerProblem {
   }
 
   override def result = {
-    var i = 1
+    var i = 1L
     while (numDivisors(i * (i + 1) / 2) <= 500) i += 1
     i * (i + 1) / 2
   }

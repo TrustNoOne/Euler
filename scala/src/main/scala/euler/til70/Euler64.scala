@@ -11,7 +11,7 @@ object Euler64 extends EulerProblem {
 
   // based on http://en.wikipedia.org/wiki/Methods_of_computing_square_roots#Continued_fraction_expansion
   def contFractLen(n: Int) = {
-    val a0 = math.sqrt(n).toInt
+    val a0 = math.sqrt(n.toDouble).toInt
     val m1 = a0
     val d1 = n - m1 * m1
     val a1 = (a0 + m1) / d1
@@ -23,7 +23,8 @@ object Euler64 extends EulerProblem {
       val aNext = (a0 + mNext) / dNext
 
       // when (m,d,a) repeats, the repeating sequence is starting again
-      if (mNext != m1 || dNext != d1 || aNext != a1) loop(mNext, dNext, aNext, cnt + 1)
+      if (mNext != m1 || dNext != d1 || aNext != a1)
+        loop(mNext, dNext, aNext, cnt + 1)
       else cnt
     }
 
@@ -31,4 +32,3 @@ object Euler64 extends EulerProblem {
   }
 
 }
-

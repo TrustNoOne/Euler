@@ -10,7 +10,7 @@ object Euler65 extends EulerProblem {
     var (i, k) = (1, 0)
     val hasNext = true
 
-    def next = {
+    def next(): Int = {
       i = i + 1
       if (i % 3 == 0) {
         k = k + 1
@@ -22,13 +22,13 @@ object Euler65 extends EulerProblem {
 
   override def result = {
     //starting from the 2nd (3)
-    val res = eContFractIterator.take(99).foldRight((BigInt(1), BigInt(0))) {
-      case (x, (num, den)) => (x * num + den, num)
-    }
+    val res =
+      eContFractIterator.take(99).foldRight((BigInt(1), BigInt(0))) {
+        case (x, (num, den)) => (x * num + den, num)
+      }
 
     val hundredthConvNum = res._2 + 2 * res._1
     hundredthConvNum.toString.map(_.toString.toInt).sum
   }
 
 }
-

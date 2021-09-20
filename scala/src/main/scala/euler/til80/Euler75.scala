@@ -1,15 +1,13 @@
 package euler
 package til80
 
-import scala.annotation.tailrec
-
 object Euler75 extends EulerProblem {
 
   /* see Euler39
-   * 
+   *
    * a = m^2-n^2 b = 2mn c = m^2+n^2
    * a+b+c = 2*m^2 +2mn = 2m(m+n)
-   * 2m(m+n) <= 1000 
+   * 2m(m+n) <= 1000
    */
   override def result = {
     import math._
@@ -17,7 +15,7 @@ object Euler75 extends EulerProblem {
 
     val primitiveTriples = for {
       n <- 1 until maxL
-      m <- n + 1 to ((sqrt(n * n + 2 * maxL) - n) / 2).toInt by 2
+      m <- n + 1 to ((sqrt(n.toDouble * n + 2 * maxL) - n) / 2).toInt by 2
       if gcd(m, n) == 1
     } yield (m * m - n * n, 2 * m * n, m * m + n * n)
 
@@ -29,11 +27,13 @@ object Euler75 extends EulerProblem {
       loop(1, Nil)
     }
 
-    val res = allTriples.groupBy(x => x._1 + x._2 + x._3) filter { case (_, triangs) => triangs.size == 1 }
+    val res = allTriples.groupBy(x => x._1 + x._2 + x._3) filter {
+      case (_, triangs) => triangs.size == 1
+    }
     res.size
   }
 
-  // slower 
+  // slower
   //    val allTriples = for {
   //      n <- 1 until maxL
   //      m <- n + 1 to ((sqrt(n * n + 2 * maxL) - n) / 2).toInt by 2
@@ -45,4 +45,3 @@ object Euler75 extends EulerProblem {
   //    } yield (i * a, i * b, i * c)
 
 }
-

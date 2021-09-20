@@ -9,15 +9,16 @@ object Euler95 extends EulerProblem {
   override def result = {
     (2 to Max).foreach(x => (2 * x to Max by x).foreach(chains(_) += x))
 
-    (2 to Max).foldLeft((Max + 1, -1)) {
-      case ((res, maxLen), x) =>
-        val currChainLen = chainLen(x)
-        if (currChainLen > maxLen) (x, currChainLen)
-        else if (currChainLen == maxLen && x < res) (x, currChainLen)
-        else (res, maxLen)
-    }._1
+    (2 to Max)
+      .foldLeft((Max + 1, -1)) {
+        case ((res, maxLen), x) =>
+          val currChainLen = chainLen(x)
+          if (currChainLen > maxLen) (x, currChainLen)
+          else if (currChainLen == maxLen && x < res) (x, currChainLen)
+          else (res, maxLen)
+      }
+      ._1
   }
-
 
   def chainLen(start: Int) = {
     def loop(x: Int, len: Int, visited: Set[Int]): Int = {
@@ -30,5 +31,3 @@ object Euler95 extends EulerProblem {
     loop(start, 1, Set(1))
   }
 }
-
-

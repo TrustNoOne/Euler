@@ -18,7 +18,7 @@ object Euler61 extends EulerProblem {
     } yield Seq(p1, p2, p3, p4, p5, p6)
 
     val res = cyclics find { xs =>
-      // each number could be of more that one polygonal kind 
+      // each number could be of more that one polygonal kind
       val ss = xs map sides
       val sidesCombinations = for {
         s1 <- ss(0)
@@ -44,4 +44,3 @@ object Euler61 extends EulerProblem {
   }
 
 }
-

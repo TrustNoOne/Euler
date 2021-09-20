@@ -3,10 +3,9 @@ package til110
 
 import euler.Utils.withResource
 
-import scala.collection.BitSet
+import scala.collection.parallel.CollectionConverters._
 
 /**
-  *
   * Let S(A) represent the sum of elements in set A of size n. We shall call it a special sum set if
   * for any two non-empty disjoint subsets, B and C, the following properties are true:
   * S(B) ≠ S(C); that is, sums of subsets cannot be equal.
@@ -19,7 +18,6 @@ import scala.collection.BitSet
   * Using sets.txt (right click and "Save Link/Target As..."), a 4K text file with one-hundred sets
   * containing seven to twelve elements (the two examples given above are the first two sets in the file),
   * identify all the special sum sets, A1, A2, ..., Ak, and find the value of S(A1) + S(A2) + ... + S(Ak).
-  *
   */
 object Euler105 extends EulerProblem {
 
@@ -41,16 +39,17 @@ object Euler105 extends EulerProblem {
     checks forall (_ == true)
   }
 
-
   override def result = {
     parseSets().par.filter(isSpecialSumSet).map(_.sum).sum
   }
 
   def parseSets() = withResource("p105_sets.txt") { src =>
-    src.getLines().map { line =>
-      Set(line.split(",").map(_.toInt): _*)
-    }.toList
+    src
+      .getLines()
+      .map { line =>
+        line.split(",").view.map(_.toInt).toSet
+      }
+      .toList
   }
-
 
 }

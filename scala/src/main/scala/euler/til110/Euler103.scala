@@ -1,7 +1,7 @@
 package euler
 package til110
 
-import scala.collection.BitSet
+import scala.collection.immutable.BitSet
 
 /**
   * Let S(A) represent the sum of elements in set A of size n. We shall call it a special sum set if
@@ -29,8 +29,6 @@ import scala.collection.BitSet
   * The optimum set for n = 6 is A = {11, 18, 19, 20, 22, 25}, with S(A) = 115 and corresponding set string: 111819202225.
   *
   * Given that A is an optimum special sum set for n = 7, find its set string.
-  *
-  *
   */
 object Euler103 extends EulerProblem {
   /*
@@ -51,27 +49,36 @@ object Euler103 extends EulerProblem {
     * p1: S(B) ≠ S(C); that is, sums of subsets cannot be equal.
     * p2: If B contains more elements than C then S(B) > S(C).
     */
-  def updateForbidden(pos: Int, newElem: Int, forbiddenSums: Map[Int, BitSet]): Option[Map[Int, BitSet]] =
+  def updateForbidden(
+      pos: Int,
+      newElem: Int,
+      forbiddenSums: Map[Int, BitSet]): Option[Map[Int, BitSet]] =
     if (pos == 0) Some(forbiddenSums)
     else {
       //println(s"upd: pos=$pos  newElem=$newElem forb=$forbiddenSums")
       // create the new forbidden sums for this position adding the element to the previous position forbidden sums
       val thisPosForbidden = forbiddenSums.getOrElse(pos, BitSet.empty)
       val newForbidden = forbiddenSums(pos - 1) map (_ + newElem)
-      val nextPosMinForbidden = forbiddenSums.get(pos + 1).map(_.head) getOrElse Int.MaxValue
+      val nextPosMinForbidden = forbiddenSums
+        .get(pos + 1)
+        .map(_.head) getOrElse Int.MaxValue
 
       val p1 = (newForbidden & thisPosForbidden).isEmpty
       val p2 = nextPosMinForbidden > newForbidden.max
 
       if (p1 && p2) {
-        val updatedForbiddenSums = forbiddenSums.updated(pos, thisPosForbidden | newForbidden)
+        val updatedForbiddenSums =
+          forbiddenSums.updated(pos, thisPosForbidden | newForbidden)
         updateForbidden(pos - 1, newElem, updatedForbiddenSums)
       } else None
     }
 
-
   def solve(size: Int, startElem: Int) = {
-    def loop(loopSize: Int, current: BitSet, elem: Int, pos: Int, forbiddenSums: Map[Int, BitSet]): Option[BitSet] = {
+    def loop(loopSize: Int,
+             current: BitSet,
+             elem: Int,
+             pos: Int,
+             forbiddenSums: Map[Int, BitSet]): Option[BitSet] = {
       //println(s"size=$loopSize elem=$elem pos=$pos current=$current forb=$forbiddenSums")
 
       if (pos > loopSize) Some(current)
@@ -84,13 +91,20 @@ object Euler103 extends EulerProblem {
 
         def findSolution(elem: Int, bestSoFar: Int): Option[BitSet] = {
           // update forbidden sums with the current element and recursively search the next element using the updated sums
-          updateForbidden(pos, elem, forbiddenSums) flatMap { newForbiddenSums =>
-            loop(loopSize, current + elem, elem + 1, pos + 1, newForbiddenSums)
+          updateForbidden(pos, elem, forbiddenSums) flatMap {
+            newForbiddenSums =>
+              loop(loopSize,
+                   current + elem,
+                   elem + 1,
+                   pos + 1,
+                   newForbiddenSums)
           } match {
-            case Some(result) if result.sum >= bestSoFar => // found a result but it's worse than the best one
+            case Some(result)
+                if result.sum >= bestSoFar => // found a result but it's worse than the best one
               None
 
-            case result if elem == maxVal => // can't go any further, return what we have
+            case result
+                if elem == maxVal => // can't go any further, return what we have
               result
 
             case None => // try the next one and see if we're lucky
@@ -104,7 +118,8 @@ object Euler103 extends EulerProblem {
               val minIncrease = elem * remaining + (remaining * (remaining + 1) / 2)
               if (current.sum + minIncrease < newBest) {
                 findSolution(elem + 1, newBest) match {
-                  case Some(newResult) if newResult.sum < newBest => Some(newResult)
+                  case Some(newResult) if newResult.sum < newBest =>
+                    Some(newResult)
                   case _ => Some(result)
                 }
               } else {
@@ -117,21 +132,25 @@ object Euler103 extends EulerProblem {
       }
     }
 
-    loop(size, current = BitSet.empty, elem = startElem, pos = 1, Map(0 -> BitSet(0))).get
+    loop(size,
+         current = BitSet.empty,
+         elem = startElem,
+         pos = 1,
+         Map(0 -> BitSet(0))).get
   }
-
 
   override def result = {
     // find next one using the middle element of the previous one as start element
     val resultSize = 7
-    val (result, _) = Iterator.range(1, resultSize + 1).foldLeft((BitSet.empty, 1)) { case ((currentRes, midElem), size) =>
-      val newResult = solve(size, midElem)
-      val newMidElem = newResult.drop(newResult.size/2).head
-      (newResult, newMidElem)
-    }
+    val (result, _) =
+      Iterator.range(1, resultSize + 1).foldLeft((BitSet.empty, 1)) {
+        case ((_, midElem), size) =>
+          val newResult = solve(size, midElem)
+          val newMidElem = newResult.drop(newResult.size / 2).head
+          (newResult, newMidElem)
+      }
 
     result.mkString
   }
-
 
 }

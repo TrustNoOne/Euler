@@ -1,7 +1,6 @@
 package euler
 package til110
 
-
 /**
   * The Fibonacci sequence is defined by the recurrence relation:
   *
@@ -18,7 +17,6 @@ object Euler104 extends EulerProblem {
   override def result = {
     PandigitalFibIdxIterator.next()
   }
-
 
   private object PandigitalFibIdxIterator extends Iterator[Int] {
     override def hasNext = true
@@ -45,4 +43,3 @@ object Euler104 extends EulerProblem {
     }
   }
 }
-

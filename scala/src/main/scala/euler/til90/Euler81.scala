@@ -21,7 +21,9 @@ object Euler81 extends EulerProblem {
       //(i,j) = node indexes in topological order
     } {
       //indexes of destinations
-      val dests = Seq((i + 1, j), (i, j + 1)) filter { case (i, j) => i < matrixSize && j < matrixSize }
+      val dests = Seq((i + 1, j), (i, j + 1)) filter {
+        case (i, j) => i < matrixSize && j < matrixSize
+      }
 
       //update costs
       dests foreach {
@@ -35,8 +37,6 @@ object Euler81 extends EulerProblem {
   }
 
   def readMatrix() = withResource("matrix.txt") { src =>
-    src.getLines.map(_.split(',').map(_.toInt)).toVector
+    src.getLines().map(_.split(',').map(_.toInt)).toVector
   }
 }
-
-

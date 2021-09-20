@@ -2,7 +2,8 @@ package euler
 package til10
 
 object Euler4 extends EulerProblem {
-  def isPalindrome(n: Int) = (n.toString, n.toString.reverse).zipped forall (_ == _)
+  def isPalindrome(n: Int) =
+    n.toString.lazyZip(n.toString.reverse) forall (_ == _)
 
   override def result = {
     val palindromes = for {

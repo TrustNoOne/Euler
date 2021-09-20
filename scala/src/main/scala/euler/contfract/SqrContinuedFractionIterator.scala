@@ -1,13 +1,13 @@
 package euler.contfract
 
 /**
- * Iterator for continued fraction expansion of a square root
- *
- * @see http://en.wikipedia.org/wiki/Methods_of_computing_square_roots#Continued_fraction_expansion
- */
+  * Iterator for continued fraction expansion of a square root
+  *
+  * @see http://en.wikipedia.org/wiki/Methods_of_computing_square_roots#Continued_fraction_expansion
+  */
 class SqrContinuedFractionIterator(n: Int) extends Iterator[Int] {
   val hasNext: Boolean = true
-  val a0 = math.sqrt(n).toInt
+  val a0 = math.sqrt(n.toDouble).toInt
 
   var m = 0
   var d = 1
