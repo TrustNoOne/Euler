@@ -5,7 +5,7 @@ import euler._
 
 object Euler64 extends EulerProblem {
 
-  override def result = {
+  override def result() = {
     (2 to 10000) filterNot isPerfectSquare map contFractLen count (_ % 2 == 1)
   }
 

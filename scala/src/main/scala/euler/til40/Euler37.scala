@@ -2,7 +2,7 @@ package euler
 package til40
 
 object Euler37 extends EulerProblem {
-  override def result = {
+  override def result() = {
     LazyList
       .from(9, 2)
       .filter { n =>

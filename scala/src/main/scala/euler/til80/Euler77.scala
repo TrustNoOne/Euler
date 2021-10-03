@@ -3,7 +3,7 @@ package til80
 
 object Euler77 extends EulerProblem {
 
-  override def result = {
+  override def result() = {
     val res = primePartionCnts(10000).zipWithIndex.find(_._1 > 5000).get
     res._2
   }

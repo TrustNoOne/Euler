@@ -6,7 +6,7 @@ object Euler86 extends EulerProblem {
   // cuboid with edges a <= b <= c
   // calculating the derivative of (sqrt(x^2+b^2) + sqrt((a-x)^2+c^2))
   // we know that the minimum path has length sqrt(c^2+(a+b)^2)
-  override def result = {
+  override def result() = {
     val lens = for {
       c <- Iterator.from(1)
       b <- Range.inclusive(1, c)

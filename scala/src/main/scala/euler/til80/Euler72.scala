@@ -3,7 +3,7 @@ package til80
 
 object Euler72 extends EulerProblem {
 
-  override def result = {
+  override def result() = {
     //sum of all coprimes to each possible denominator
     (2 to 1000000).foldLeft(0L)((t, x) => t + φ(x))
   }

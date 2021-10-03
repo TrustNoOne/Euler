@@ -10,7 +10,7 @@ object Euler85 extends EulerProblem {
   //
   //XxY => Y+2Y+...+XY + (Y-1)+2*(Y-1)+...+X*(Y-1) + 1+2+...+X = (X*(X+1)/2)*(Y*(Y+1)/2)
 
-  override def result = {
+  override def result() = {
     val cr = for {
       w <- 1 to 1000
       h <- w to 1000

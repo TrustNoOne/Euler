@@ -2,7 +2,7 @@ package euler
 package til10
 
 object Euler6 extends EulerProblem {
-  override def result = {
+  override def result() = {
     val n = 100
     val sum = (n * (n + 1)) / 2
     val squareOfSum = sum * sum

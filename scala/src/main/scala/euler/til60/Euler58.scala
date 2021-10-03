@@ -3,7 +3,7 @@ package til60
 
 object Euler58 extends EulerProblem {
 
-  override def result = {
+  override def result() = {
     /*
      * 1 iteration = 1 spiral cycle
      * center elem: 1

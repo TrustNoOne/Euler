@@ -4,7 +4,7 @@ package til20
 object Euler19 extends EulerProblem {
   import java.util._
   import Calendar._
-  override def result = { //procedural...
+  override def result() = { //procedural...
     val currDate = new GregorianCalendar(1901, JANUARY, 1)
     val endDate = new GregorianCalendar(2001, JANUARY, 1)
     var count = 0

@@ -7,5 +7,5 @@ object Euler16 extends EulerProblem {
     else sumDigits(n / 10, acc + n % 10)
   }
 
-  override def result = sumDigits(BigInt(1) << 1000)
+  override def result() = sumDigits(BigInt(1) << 1000)
 }

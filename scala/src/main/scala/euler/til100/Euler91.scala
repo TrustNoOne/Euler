@@ -2,7 +2,7 @@ package euler
 package til100
 
 object Euler91 extends EulerProblem {
-  override def result = {
+  override def result() = {
     val max = 50
 
     val xs = for {

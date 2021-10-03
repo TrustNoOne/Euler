@@ -16,10 +16,9 @@ object Euler57 extends EulerProblem {
     def apply(n: BigInt): BigRational = apply(n, 1)
   }
 
-  override def result = {
+  override def result() = {
     lazy val expansionsMinusOne: LazyList[BigRational] =
-      BigRational(0) #:: expansionsMinusOne.map(n =>
-        BigRational(n.den, n.num + n.den * 2))
+      BigRational(0) #:: expansionsMinusOne.map(n => BigRational(n.den, n.num + n.den * 2))
 
     val expansions = (1 to 1000).map(expansionsMinusOne).map(_ + 1)
     expansions.filter(n => n.num.toString.length > n.den.toString.length).size

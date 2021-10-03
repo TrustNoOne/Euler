@@ -14,10 +14,8 @@ object Euler47 extends EulerProblem {
     loop(n, 0, primes)
   }
 
-  override def result = {
-    val res = Iterator.from(2 * 3 * 5 * 7).dropWhile { n =>
-      (n to n + 3).exists(factorCount2(_) != 4)
-    }
+  override def result() = {
+    val res = Iterator.from(2 * 3 * 5 * 7).dropWhile { n => (n to n + 3).exists(factorCount2(_) != 4) }
     res.next()
   }
 }

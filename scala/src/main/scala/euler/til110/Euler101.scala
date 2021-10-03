@@ -3,7 +3,7 @@ package til110
 
 object Euler101 extends EulerProblem {
 
-  override def result = {
+  override def result() = {
     // val un = Vector(1, 683, 44287, 838861, 8138021, 51828151, 247165843, 954437177, 3138105961L, 9090909091L, 23775972551L)
     //  un = 1 − n + n2 − n3 + n4 − n5 + n6 − n7 + n8 − n9 + n10
     (1 to 10).map(x => genseq(op(x): _*)(x + 1)).sum

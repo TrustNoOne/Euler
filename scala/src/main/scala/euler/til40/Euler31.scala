@@ -14,5 +14,5 @@ object Euler31 extends EulerProblem {
     }
   }
 
-  override def result = subprob(0, 200)
+  override def result() = subprob(0, 200)
 }

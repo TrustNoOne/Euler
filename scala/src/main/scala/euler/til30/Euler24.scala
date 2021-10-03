@@ -18,5 +18,5 @@ object Euler24 extends EulerProblem {
     }
   }
 
-  override def result = res(1000000, 10).mkString
+  override def result() = res(1000000, 10).mkString
 }

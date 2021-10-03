@@ -3,12 +3,10 @@ package til70
 
 object Euler70 extends EulerProblem {
 
-  override def result = {
-    val res = (2 until 10000000).view map { n =>
-      (n, φ(n))
-    } filter {
-      case (n, φn)         => isPermutation(n, φn)
-    } minBy { case (n, φn) => n.toDouble / φn }
+  override def result() = {
+    val res = (2 until 10000000).view map { n => (n, φ(n)) } filter { case (n, φn) => isPermutation(n, φn) } minBy {
+      case (n, φn) => n.toDouble / φn
+    }
 
     res._1
   }

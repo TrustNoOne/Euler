@@ -15,7 +15,7 @@ object Euler59 extends EulerProblem {
     text.grouped(key.size).flatMap(_.zip(key).map(x => (x._1 ^ x._2).toChar))
   }
 
-  override def result = withResource("cipher1.txt") { src =>
+  override def result() = withResource("cipher1.txt") { src =>
     val chars = src.mkString.split(",").map(_.trim.toInt.toChar)
 
     val decrypted = keys.view

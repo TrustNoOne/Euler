@@ -16,7 +16,7 @@ object Euler84 extends EulerProblem {
   val rnd = new Random
   val landings = Array.ofDim[Int](40)
 
-  override def result = {
+  override def result() = {
     var currPos = 0
     // simulate 1 million rolls
     for (_ <- 1 to 1000000) {
@@ -33,25 +33,25 @@ object Euler84 extends EulerProblem {
   def evalLanding(currPos: Int) = currPos match {
     case 7 | 22 | 36 => evalCH(currPos)
     case 2 | 17 | 33 => evalCC(currPos)
-    case 30          => 10 // G2J
-    case _           => currPos
+    case 30 => 10 // G2J
+    case _ => currPos
   }
 
   def evalCH(currPos: Int): Int = rnd.nextInt(16) match {
-    case 0                      => 0 // GO
-    case 1                      => 10 // JAIL
-    case 2                      => 11 // C1
-    case 3                      => 24 // E3
-    case 4                      => 39 // H2
-    case 5                      => 5
-    case 6 | 7 if currPos == 7  => 15
+    case 0 => 0 // GO
+    case 1 => 10 // JAIL
+    case 2 => 11 // C1
+    case 3 => 24 // E3
+    case 4 => 39 // H2
+    case 5 => 5
+    case 6 | 7 if currPos == 7 => 15
     case 6 | 7 if currPos == 22 => 25
-    case 6 | 7                  => 5
-    case 8 if currPos == 7      => 12
-    case 8 if currPos == 22     => 28
-    case 8                      => 12
-    case 9                      => currPos - 3
-    case _                      => currPos
+    case 6 | 7 => 5
+    case 8 if currPos == 7 => 12
+    case 8 if currPos == 22 => 28
+    case 8 => 12
+    case 9 => currPos - 3
+    case _ => currPos
   }
 
   def evalCC(currPos: Int): Int = rnd.nextInt(16) match {

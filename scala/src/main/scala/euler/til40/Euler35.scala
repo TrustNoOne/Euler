@@ -11,6 +11,6 @@ object Euler35 extends EulerProblem {
     n #:: (rotStream(n) takeWhile (_ != n))
   }
 
-  override def result =
+  override def result() =
     Range(3, 1000000, 2).filter(rotations(_) forall isPrime).size + 1 //2
 }

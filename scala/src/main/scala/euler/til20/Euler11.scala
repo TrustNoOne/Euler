@@ -26,24 +26,21 @@ object Euler11 extends EulerProblem {
     " ",
   ).toList map (_.toInt))
 
-  override def result = {
+  override def result() = {
     List(maxRow _, maxCol _, maxDLtoUR _, maxULtoDR _).map(_(table)).max
   }
 
   def maxRow(xs: List[List[Int]]): Int = {
     def max(xs: IterableOnce[Int]) =
       if (xs.iterator.isEmpty) 0 else xs.iterator.max
-    xs.map { ys =>
-      max(ys.sliding(4).map(_.product))
-    }.max
+    xs.map { ys => max(ys.sliding(4).map(_.product)) }.max
   }
 
   def maxCol(xs: List[List[Int]]): Int = maxRow(xs.transpose)
 
   def maxDLtoUR(xs: List[List[Int]]): Int =
-    maxCol(xs.zip(LazyList.from(0)) map {
-      case (ys, nZeroes) =>
-        List.fill(nZeroes)(0) ++ ys ++ List.fill(ys.length - nZeroes)(0)
+    maxCol(xs.zip(LazyList.from(0)) map { case (ys, nZeroes) =>
+      List.fill(nZeroes)(0) ++ ys ++ List.fill(ys.length - nZeroes)(0)
     })
 
   def maxULtoDR(xs: List[List[Int]]): Int = maxDLtoUR(xs.reverse)

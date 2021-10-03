@@ -8,7 +8,7 @@ object Euler12 extends EulerProblem {
     else numDivisors(n, curr + 1, 0, acc * (cnt + 1))
   }
 
-  override def result = {
+  override def result() = {
     var i = 1L
     while (numDivisors(i * (i + 1) / 2) <= 500) i += 1
     i * (i + 1) / 2

@@ -3,7 +3,7 @@ package til100
 
 object Euler94 extends EulerProblem {
 
-  override def result = {
+  override def result() = {
     LongIterator
       .from(3, 2)
       .take(166666666)
@@ -18,14 +18,12 @@ object Euler94 extends EulerProblem {
 
         // Heron's formula - semiperimeter = 2m+n+1
         // area = sqrt((2m+n+1)*(2m-n+1)*n*n) = n*sqrt((2m+1)^2-n^2)
-        Seq((p1, (2 * m + 1) * (2 * m + 1) - n1 * n1),
-            (p2, (2 * m + 1) * (2 * m + 1) - n2 * n2))
+        Seq((p1, (2 * m + 1) * (2 * m + 1) - n1 * n1), (p2, (2 * m + 1) * (2 * m + 1) - n2 * n2))
 
       }
       .filter {
         // double check perfect square, isPerfectSquare has false positives because of fp precision with big numbers
-        x =>
-          isPerfectSquare(x._2) && isPerfectSquare2(x._2)
+        x => isPerfectSquare(x._2) && isPerfectSquare2(x._2)
       }
       .map(_._1)
       .sum

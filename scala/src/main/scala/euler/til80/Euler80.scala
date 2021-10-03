@@ -3,7 +3,7 @@ package til80
 
 object Euler80 extends EulerProblem {
 
-  override def result = {
+  override def result() = {
     val res = (2 to 99) filterNot isPerfectSquare map { sqrDigits(_, 100).sum }
     res.sum
   }
@@ -34,8 +34,8 @@ object Euler80 extends EulerProblem {
   }
 
   /**
-    * iterator of pairs of digits. E.g. for 12345 -> Seq(1,23,45)
-    */
+   * iterator of pairs of digits. E.g. for 12345 -> Seq(1,23,45)
+   */
   def pairsIterator(x: Int) = {
     val xStr = x.toString
     val xDigits =

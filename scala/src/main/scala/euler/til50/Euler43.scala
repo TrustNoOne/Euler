@@ -12,8 +12,7 @@ object Euler43 extends EulerProblem {
     fromDigits(xs.slice(0, 3)) % 17 == 0
   }
 
-  override def result = {
-    List(0L, 1, 2, 3, 4, 5, 6, 7, 8,
-      9).permutations.filter(subStringDivCheck).map(fromDigits).sum
+  override def result() = {
+    List(0L, 1, 2, 3, 4, 5, 6, 7, 8, 9).permutations.filter(subStringDivCheck).map(fromDigits).sum
   }
 }

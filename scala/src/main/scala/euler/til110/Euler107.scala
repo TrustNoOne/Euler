@@ -6,8 +6,8 @@ import euler.Utils.withResource
 import scala.collection.mutable
 
 /**
-  * Minimum spanning tree
-  */
+ * Minimum spanning tree
+ */
 object Euler107 extends EulerProblem {
 
   /*
@@ -37,7 +37,7 @@ object Euler107 extends EulerProblem {
     }
   }
 
-  override def result = {
+  override def result() = {
     val graph = parseGraph()
     val Qmap = mutable.Map(graph.map(v => v.idx -> v): _*)
     val Q = mutable.TreeSet(graph: _*)
@@ -50,19 +50,18 @@ object Euler107 extends EulerProblem {
         Q.remove(v)
         Qmap.remove(v.idx)
 
-        v.conns foreach {
-          case edge @ Edge(_, to, cost) =>
-            //println(edge)
-            Qmap.get(to).filter(cost < _.C) foreach { w =>
-              Q -= w
-              val newW = w.copy(C = cost, E = Some(edge))
-              Q += newW
-              Qmap += w.idx -> newW
-            }
+        v.conns foreach { case edge @ Edge(_, to, cost) =>
+          //println(edge)
+          Qmap.get(to).filter(cost < _.C) foreach { w =>
+            Q -= w
+            val newW = w.copy(C = cost, E = Some(edge))
+            Q += newW
+            Qmap += w.idx -> newW
+          }
         }
 
         v.E match {
-          case None       => minSpanningTreeCost(result)
+          case None => minSpanningTreeCost(result)
           case Some(edge) => minSpanningTreeCost(edge.weight + result)
         }
       }
@@ -77,13 +76,12 @@ object Euler107 extends EulerProblem {
       .getLines()
       .map(_ split ",")
       .zipWithIndex
-      .map {
-        case (line, idx) =>
-          val conns = line.zipWithIndex
-            .filter { case (weight, _) => weight != "-" }
-            .map { case (weight, to) => Edge(idx, to, weight.toInt) }
+      .map { case (line, idx) =>
+        val conns = line.zipWithIndex
+          .filter { case (weight, _) => weight != "-" }
+          .map { case (weight, to) => Edge(idx, to, weight.toInt) }
 
-          Vertex(idx, C = Int.MaxValue, E = None, conns.toList)
+        Vertex(idx, C = Int.MaxValue, E = None, conns.toList)
       }
       .toList
   }

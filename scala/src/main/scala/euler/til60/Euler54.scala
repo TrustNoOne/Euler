@@ -25,9 +25,8 @@ object Euler54 extends EulerProblem {
   case class Hand(p1cards: collection.Seq[Card]) {
     lazy val vals = p1cards.groupBy(_.value).view.mapValues(_.map(_.suit))
     lazy val suits = p1cards.groupBy(_.suit).view.mapValues(_.map(_.value))
-    lazy val cardCounts = p1cards.foldLeft(SortedMap.empty[Int, Int]) {
-      (counts, card) =>
-        counts + (card.value -> (counts.getOrElse(card.value, 0) + 1))
+    lazy val cardCounts = p1cards.foldLeft(SortedMap.empty[Int, Int]) { (counts, card) =>
+      counts + (card.value -> (counts.getOrElse(card.value, 0) + 1))
     }
 
     override def toString = {
@@ -37,20 +36,18 @@ object Euler54 extends EulerProblem {
 
   private def charToVal(c: Char): Int = c match {
     case '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9' => c.toInt - 48
-    case 'T'                                           => 10
-    case 'J'                                           => 11
-    case 'Q'                                           => 12
-    case 'K'                                           => 13
-    case 'A'                                           => 14
+    case 'T' => 10
+    case 'J' => 11
+    case 'Q' => 12
+    case 'K' => 13
+    case 'A' => 14
   }
 
   private def parseHands() = withResource("poker.txt") { src =>
     src
       .getLines()
       .map { line =>
-        val cards = line.split(" ") map { card =>
-          Card(charToVal(card(0)), Suit(card(1)))
-        }
+        val cards = line.split(" ") map { card => Card(charToVal(card(0)), Suit(card(1))) }
         val hands = cards.grouped(5) // map { _.sortBy(_.value) }
         (Hand(hands.next()), Hand(hands.next()))
       }
@@ -60,17 +57,17 @@ object Euler54 extends EulerProblem {
   private def pow(n: Int, m: Int) = math.pow(n.toDouble, m.toDouble).toInt
 
   /**
-    * High Card: Highest value card.
-    * One Pair: Two cards of the same value.
-    * Two Pairs: Two different pairs.
-    * Three of a Kind: Three cards of the same value.
-    * Straight: All cards are consecutive values.
-    * Flush: All cards of the same suit.
-    * Full House: Three of a kind and a pair.
-    * Four of a Kind: Four cards of the same value.
-    * Straight Flush: All cards are consecutive values of same suit.
-    * Royal Flush: Ten, Jack, Queen, King, Ace, in same suit.
-    */
+   * High Card: Highest value card.
+   * One Pair: Two cards of the same value.
+   * Two Pairs: Two different pairs.
+   * Three of a Kind: Three cards of the same value.
+   * Straight: All cards are consecutive values.
+   * Flush: All cards of the same suit.
+   * Full House: Three of a kind and a pair.
+   * Four of a Kind: Four cards of the same value.
+   * Straight Flush: All cards are consecutive values of same suit.
+   * Royal Flush: Ten, Jack, Queen, King, Ace, in same suit.
+   */
   private def eval(h: Hand) = {
     //very stupid ranking alg
     val cardCounts = h.cardCounts
@@ -114,7 +111,7 @@ object Euler54 extends EulerProblem {
     rankScore + flushScore + straightScore + royalScore
   }
 
-  override def result = {
+  override def result() = {
     parseHands().count { case (p1Hand, p2Hand) => eval(p1Hand) > eval(p2Hand) }
   }
 }

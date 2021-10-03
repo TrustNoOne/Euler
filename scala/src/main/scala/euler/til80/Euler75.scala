@@ -9,7 +9,7 @@ object Euler75 extends EulerProblem {
    * a+b+c = 2*m^2 +2mn = 2m(m+n)
    * 2m(m+n) <= 1000
    */
-  override def result = {
+  override def result() = {
     import math._
     val maxL = 1500000
 
@@ -27,9 +27,7 @@ object Euler75 extends EulerProblem {
       loop(1, Nil)
     }
 
-    val res = allTriples.groupBy(x => x._1 + x._2 + x._3) filter {
-      case (_, triangs) => triangs.size == 1
-    }
+    val res = allTriples.groupBy(x => x._1 + x._2 + x._3) filter { case (_, triangs) => triangs.size == 1 }
     res.size
   }
 

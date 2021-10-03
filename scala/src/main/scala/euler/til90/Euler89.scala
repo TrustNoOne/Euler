@@ -4,21 +4,14 @@ package til90
 import euler.Utils.withResource
 
 object Euler89 extends EulerProblem {
-  val LetterValues = Map('I' -> 1,
-                         'V' -> 5,
-                         'X' -> 10,
-                         'L' -> 50,
-                         'C' -> 100,
-                         'D' -> 500,
-                         'M' -> 1000)
+  val LetterValues = Map('I' -> 1, 'V' -> 5, 'X' -> 10, 'L' -> 50, 'C' -> 100, 'D' -> 500, 'M' -> 1000)
 
   def romanToInt(romanNum: String) = {
-    val (result, _) = romanNum.foldRight((0, 1)) {
-      case (romanDigit, (acc, currMaxDigit)) =>
-        LetterValues(romanDigit) match {
-          case x if x < currMaxDigit => (acc - x, currMaxDigit)
-          case x                     => (acc + x, x)
-        }
+    val (result, _) = romanNum.foldRight((0, 1)) { case (romanDigit, (acc, currMaxDigit)) =>
+      LetterValues(romanDigit) match {
+        case x if x < currMaxDigit => (acc - x, currMaxDigit)
+        case x => (acc + x, x)
+      }
     }
 
     result
@@ -47,7 +40,7 @@ object Euler89 extends EulerProblem {
     } else res
   }
 
-  override def result = withResource("p089_roman.txt") { f =>
+  override def result() = withResource("p089_roman.txt") { f =>
     f.getLines()
       .map { romanNum =>
         val x = romanToInt(romanNum)

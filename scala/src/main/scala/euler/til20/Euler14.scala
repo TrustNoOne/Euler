@@ -8,7 +8,7 @@ object Euler14 extends EulerProblem {
     else seriesLen(3 * n + 1, len + 1)
   }
 
-  override def result = {
+  override def result() = {
     (1L until 1000000L)
       .map(seriesLen(_))
       .zipWithIndex

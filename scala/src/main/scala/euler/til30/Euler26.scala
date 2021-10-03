@@ -18,7 +18,7 @@ object Euler26 extends EulerProblem {
     repeating.map(_._1).toList.takeRight(remainIdx + 1)
   }
 
-  override def result =
+  override def result() =
     (2 until 1000).map(repeatingDecimals(1, _).size).zipWithIndex.max._2 + 2
 
 }

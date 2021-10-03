@@ -4,7 +4,7 @@ package til90
 object Euler87 extends EulerProblem {
   import math._
 
-  override def result = {
+  override def result() = {
     val max = 50000000
     val maxSquareRt = pow(max.toDouble, 1.0 / 2)
     val maxCubeRt = pow(max.toDouble, 1.0 / 3)

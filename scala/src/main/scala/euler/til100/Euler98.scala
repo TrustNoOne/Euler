@@ -5,9 +5,7 @@ import euler.Utils.withResource
 
 object Euler98 extends EulerProblem {
 
-  val words = withResource("p098_words.txt") { f =>
-    f.mkString.split("""[",]+""").toList.tail
-  }
+  val words = withResource("p098_words.txt") { f => f.mkString.split("""[",]+""").toList.tail }
 
   def isSquare(word: String, mapping: Map[Char, Int]) = {
     val digits = word.map(mapping)
@@ -21,7 +19,7 @@ object Euler98 extends EulerProblem {
     mappings map (letters.zip(_).toMap) filter (isSquare(w, _))
   }
 
-  override def result = {
+  override def result() = {
     val anagrams = words
       .groupBy(_.sorted)
       .values filter (_.size > 1) flatMap (_.combinations(2))

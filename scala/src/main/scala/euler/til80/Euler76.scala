@@ -3,7 +3,7 @@ package til80
 
 object Euler76 extends EulerProblem {
 
-  override def result = {
+  override def result() = {
     val p = Array.ofDim[Int](101)
     val genPentagonals = genPentagonalIterator.to(LazyList)
 
@@ -12,10 +12,9 @@ object Euler76 extends EulerProblem {
       n <- 1 to 100
       pents = genPentagonals takeWhile (n - _ >= 0)
     } {
-      val nextP = pents.foldLeft((0, 0)) {
-        case ((res, i), k) =>
-          val sign = if (i / 2 % 2 == 0) 1 else -1
-          (res + sign * p(n - k), i + 1)
+      val nextP = pents.foldLeft((0, 0)) { case ((res, i), k) =>
+        val sign = if (i / 2 % 2 == 0) 1 else -1
+        (res + sign * p(n - k), i + 1)
       }
 
       p(n) = nextP._1

@@ -5,7 +5,7 @@ import euler._
 
 object Euler61 extends EulerProblem {
 
-  override def result = {
+  override def result() = {
     val polys = (1000 to 9999) filter isPoly
 
     val cyclics = for {

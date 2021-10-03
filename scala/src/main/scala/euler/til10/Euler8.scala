@@ -26,5 +26,5 @@ object Euler8 extends EulerProblem {
     .replace("\n", "")
     .map(_.toLong - 48)
 
-  override def result = numbers.sliding(13).map(_.product).max
+  override def result() = numbers.sliding(13).map(_.product).max
 }

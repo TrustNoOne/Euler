@@ -6,7 +6,7 @@ import scala.collection.parallel.CollectionConverters._
 
 object Euler74 extends EulerProblem {
 
-  override def result = {
+  override def result() = {
     (1 until 1000000).view.par count { chainLen(_) == 60 }
   }
 

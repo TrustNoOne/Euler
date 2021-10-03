@@ -4,10 +4,8 @@ import scala.collection.parallel.CollectionConverters._
 
 object Euler69 extends EulerProblem {
 
-  override def result = {
-    val res = (2 to 1000000).view.par map { n =>
-      (n, n.toDouble / φ(n))
-    }
+  override def result() = {
+    val res = (2 to 1000000).view.par map { n => (n, n.toDouble / φ(n)) }
     res.maxBy(_._2)._1
   }
 

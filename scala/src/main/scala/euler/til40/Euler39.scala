@@ -6,14 +6,12 @@ object Euler39 extends EulerProblem {
    * a+b+c = 2*m^2 +2mn = 2m(m+n)
    * 2m(m+n) <= 1000
    */
-  override def result = {
+  override def result() = {
     val primitiveTriples = for {
       n <- 1 to 999
       m <- n + 1 to 1000 by 2
       if 2 * m * (m + n) <= 1000
-      if (2 to m / 2) forall { x =>
-        m % x > 0 || n % x > 0
-      }
+      if (2 to m / 2) forall { x => m % x > 0 || n % x > 0 }
     } yield (m * m - n * n, 2 * m * n, m * m + n * n)
 
     val allTriples = primitiveTriples flatMap { t =>

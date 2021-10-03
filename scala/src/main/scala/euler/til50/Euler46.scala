@@ -14,5 +14,5 @@ object Euler46 extends EulerProblem {
       .size > 0
   }
 
-  override def result = oddComposites.dropWhile(isGoldbach).head
+  override def result() = oddComposites.dropWhile(isGoldbach).head
 }

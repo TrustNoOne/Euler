@@ -3,7 +3,7 @@ package til70
 
 object Euler68 extends EulerProblem {
 
-  override def result = {
+  override def result() = {
     // each possible magic 5-gon ring
     val rings = for {
       inners <- (1 to 9).toList.combinations(5).flatMap(_.permutations)
@@ -19,11 +19,7 @@ object Euler68 extends EulerProblem {
      */
     val res = rings map { // lines
       case i0 :: i1 :: i2 :: i3 :: i4 :: i5 :: i6 :: i7 :: i8 :: i9 :: Nil =>
-        List(List(i5, i0, i1),
-             List(i6, i1, i2),
-             List(i7, i2, i3),
-             List(i8, i3, i4),
-             List(i9, i4, i0))
+        List(List(i5, i0, i1), List(i6, i1, i2), List(i7, i2, i3), List(i8, i3, i4), List(i9, i4, i0))
       case _ => Nil
     } filter { // must have same size
       case l1 :: l2 :: l3 :: l4 :: l5 :: Nil =>

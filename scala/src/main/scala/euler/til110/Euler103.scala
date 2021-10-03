@@ -4,32 +4,32 @@ package til110
 import scala.collection.immutable.BitSet
 
 /**
-  * Let S(A) represent the sum of elements in set A of size n. We shall call it a special sum set if
-  * for any two non-empty disjoint subsets, B and C, the following properties are true:
-  *
-  * S(B) ≠ S(C); that is, sums of subsets cannot be equal.
-  * If B contains more elements than C then S(B) > S(C).
-  * If S(A) is minimised for a given n, we shall call it an optimum special sum set.
-  *
-  * The first five optimum special sum sets are given below.
-  *
-  * n = 1: {1}
-  * n = 2: {1, 2}
-  * n = 3: {2, 3, 4}
-  * n = 4: {3, 5, 6, 7}
-  * n = 5: {6, 9, 11, 12, 13}
-  *
-  * It seems that for a given optimum set, A = {a1, a2, ... , an},
-  * the next optimum set is of the form B = {b, a1+b, a2+b, ... ,an+b},
-  * where b is the "middle" element on the previous row.
-  *
-  * By applying this "rule" we would expect the optimum set for n = 6 to be
-  * A = {11, 17, 20, 22, 23, 24}, with S(A) = 117.
-  * However, this is not the optimum set, as we have merely applied an algorithm to provide a near optimum set.
-  * The optimum set for n = 6 is A = {11, 18, 19, 20, 22, 25}, with S(A) = 115 and corresponding set string: 111819202225.
-  *
-  * Given that A is an optimum special sum set for n = 7, find its set string.
-  */
+ * Let S(A) represent the sum of elements in set A of size n. We shall call it a special sum set if
+ * for any two non-empty disjoint subsets, B and C, the following properties are true:
+ *
+ * S(B) ≠ S(C); that is, sums of subsets cannot be equal.
+ * If B contains more elements than C then S(B) > S(C).
+ * If S(A) is minimised for a given n, we shall call it an optimum special sum set.
+ *
+ * The first five optimum special sum sets are given below.
+ *
+ * n = 1: {1}
+ * n = 2: {1, 2}
+ * n = 3: {2, 3, 4}
+ * n = 4: {3, 5, 6, 7}
+ * n = 5: {6, 9, 11, 12, 13}
+ *
+ * It seems that for a given optimum set, A = {a1, a2, ... , an},
+ * the next optimum set is of the form B = {b, a1+b, a2+b, ... ,an+b},
+ * where b is the "middle" element on the previous row.
+ *
+ * By applying this "rule" we would expect the optimum set for n = 6 to be
+ * A = {11, 17, 20, 22, 23, 24}, with S(A) = 117.
+ * However, this is not the optimum set, as we have merely applied an algorithm to provide a near optimum set.
+ * The optimum set for n = 6 is A = {11, 18, 19, 20, 22, 25}, with S(A) = 115 and corresponding set string: 111819202225.
+ *
+ * Given that A is an optimum special sum set for n = 7, find its set string.
+ */
 object Euler103 extends EulerProblem {
   /*
     6 forb(1: 6)
@@ -45,14 +45,11 @@ object Euler103 extends EulerProblem {
    */
 
   /**
-    * returns None if one of the conditions doesn't hold
-    * p1: S(B) ≠ S(C); that is, sums of subsets cannot be equal.
-    * p2: If B contains more elements than C then S(B) > S(C).
-    */
-  def updateForbidden(
-      pos: Int,
-      newElem: Int,
-      forbiddenSums: Map[Int, BitSet]): Option[Map[Int, BitSet]] =
+   * returns None if one of the conditions doesn't hold
+   * p1: S(B) ≠ S(C); that is, sums of subsets cannot be equal.
+   * p2: If B contains more elements than C then S(B) > S(C).
+   */
+  def updateForbidden(pos: Int, newElem: Int, forbiddenSums: Map[Int, BitSet]): Option[Map[Int, BitSet]] =
     if (pos == 0) Some(forbiddenSums)
     else {
       //println(s"upd: pos=$pos  newElem=$newElem forb=$forbiddenSums")
@@ -74,11 +71,7 @@ object Euler103 extends EulerProblem {
     }
 
   def solve(size: Int, startElem: Int) = {
-    def loop(loopSize: Int,
-             current: BitSet,
-             elem: Int,
-             pos: Int,
-             forbiddenSums: Map[Int, BitSet]): Option[BitSet] = {
+    def loop(loopSize: Int, current: BitSet, elem: Int, pos: Int, forbiddenSums: Map[Int, BitSet]): Option[BitSet] = {
       //println(s"size=$loopSize elem=$elem pos=$pos current=$current forb=$forbiddenSums")
 
       if (pos > loopSize) Some(current)
@@ -91,20 +84,13 @@ object Euler103 extends EulerProblem {
 
         def findSolution(elem: Int, bestSoFar: Int): Option[BitSet] = {
           // update forbidden sums with the current element and recursively search the next element using the updated sums
-          updateForbidden(pos, elem, forbiddenSums) flatMap {
-            newForbiddenSums =>
-              loop(loopSize,
-                   current + elem,
-                   elem + 1,
-                   pos + 1,
-                   newForbiddenSums)
+          updateForbidden(pos, elem, forbiddenSums) flatMap { newForbiddenSums =>
+            loop(loopSize, current + elem, elem + 1, pos + 1, newForbiddenSums)
           } match {
-            case Some(result)
-                if result.sum >= bestSoFar => // found a result but it's worse than the best one
+            case Some(result) if result.sum >= bestSoFar => // found a result but it's worse than the best one
               None
 
-            case result
-                if elem == maxVal => // can't go any further, return what we have
+            case result if elem == maxVal => // can't go any further, return what we have
               result
 
             case None => // try the next one and see if we're lucky
@@ -132,22 +118,17 @@ object Euler103 extends EulerProblem {
       }
     }
 
-    loop(size,
-         current = BitSet.empty,
-         elem = startElem,
-         pos = 1,
-         Map(0 -> BitSet(0))).get
+    loop(size, current = BitSet.empty, elem = startElem, pos = 1, Map(0 -> BitSet(0))).get
   }
 
-  override def result = {
+  override def result() = {
     // find next one using the middle element of the previous one as start element
     val resultSize = 7
     val (result, _) =
-      Iterator.range(1, resultSize + 1).foldLeft((BitSet.empty, 1)) {
-        case ((_, midElem), size) =>
-          val newResult = solve(size, midElem)
-          val newMidElem = newResult.drop(newResult.size / 2).head
-          (newResult, newMidElem)
+      Iterator.range(1, resultSize + 1).foldLeft((BitSet.empty, 1)) { case ((_, midElem), size) =>
+        val newResult = solve(size, midElem)
+        val newMidElem = newResult.drop(newResult.size / 2).head
+        (newResult, newMidElem)
       }
 
     result.mkString

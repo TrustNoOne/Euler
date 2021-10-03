@@ -8,9 +8,7 @@ object Euler36 extends EulerProblem {
   def isPalindrome[T](xs: Seq[T]) =
     (xs zip xs.reverse) take (xs.size / 2) forall (x => x._1 == x._2)
 
-  override def result = {
-    (1 to 1000000).filter { n =>
-      isPalindrome(toDigits(n)) && isPalindrome(toBinaryDigits(n))
-    }.sum
+  override def result() = {
+    (1 to 1000000).filter { n => isPalindrome(toDigits(n)) && isPalindrome(toBinaryDigits(n)) }.sum
   }
 }

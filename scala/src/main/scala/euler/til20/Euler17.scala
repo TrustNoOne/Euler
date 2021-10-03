@@ -2,7 +2,7 @@ package euler
 package til20
 
 object Euler17 extends EulerProblem {
-  override def result = {
+  override def result() = {
     //one two three four five six seven eight nine
     val OneToNine = 3 + 3 + 5 + 4 + 4 + 3 + 5 + 5 + 4
     //eleven twelve thirteen fourteen fifteen sixteen seventeen eighteen nineteen

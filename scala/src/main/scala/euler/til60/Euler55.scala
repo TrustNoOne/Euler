@@ -15,7 +15,7 @@ object Euler55 extends EulerProblem {
     loop(n, 0)
   }
 
-  override def result = {
+  override def result() = {
     1 to 10000 count isLychrel
   }
 }

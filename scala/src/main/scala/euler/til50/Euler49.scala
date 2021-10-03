@@ -4,7 +4,7 @@ package til50
 object Euler49 extends EulerProblem {
   val fourDigitPrimes = Range(1001, 9999, 2).filter(isPrime)
 
-  override def result = {
+  override def result() = {
     val primesWithAtLeastThreePrimePermutations =
       fourDigitPrimes.groupBy(toDigits(_).sorted).values.filter(_.size >= 3)
     /* find all the "distances" between the primes in the set, and filter only
